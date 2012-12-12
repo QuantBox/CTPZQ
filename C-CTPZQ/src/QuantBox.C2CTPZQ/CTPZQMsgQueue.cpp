@@ -64,7 +64,7 @@ void CCTPZQMsgQueue::RunInThread()
 		{
 			//失败表示队列为空，等待一会再来取为好
 			m_nSleep *= 2;
-			m_nSleep %= 256;//不超过N毫秒
+			m_nSleep %= 255;//不超过N毫秒
 			Sleep(m_nSleep);
 		}
 	}

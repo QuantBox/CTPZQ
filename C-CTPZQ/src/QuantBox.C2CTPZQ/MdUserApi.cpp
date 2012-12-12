@@ -188,7 +188,7 @@ void CMdUserApi::Subscribe(const set<string>& instrumentIDs,const string& szExch
 	for(set<string>::iterator i=instrumentIDs.begin();i!=instrumentIDs.end();++i)
 	{
 		szInstrumentIDs.append(*i);
-		szInstrumentIDs.append(",");
+		szInstrumentIDs.append(";");
 	}
 
 	if (szInstrumentIDs.length()>1)
