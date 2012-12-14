@@ -1315,6 +1315,10 @@ namespace QuantBox.CSharp2CTPZQ
         /// 融券总市值
         /// </summary>
         public double SSStockValue;
+        /// <summary>
+        /// 国债回购占用资金
+        /// </summary>
+        public double BondRepurchaseValue;
     }
 
     /// <summary>
@@ -1480,7 +1484,7 @@ namespace QuantBox.CSharp2CTPZQ
         /// </summary>
         public double MarginTradeFrozenAmount;
         /// <summary>
-        /// 融资买入折算金额
+        /// 融资买入盈亏
         /// </summary>
         public double MarginTradeConversionAmount;
         /// <summary>
@@ -1492,7 +1496,7 @@ namespace QuantBox.CSharp2CTPZQ
         /// </summary>
         public double ShortSellAmount;
         /// <summary>
-        /// 融券卖出折算金额
+        /// 融券卖出盈亏
         /// </summary>
         public double ShortSellConversionAmount;
         /// <summary>
@@ -1603,61 +1607,37 @@ namespace QuantBox.CSharp2CTPZQ
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
         public string InvestorID;
         /// <summary>
-        /// 买印花税率
+        /// 买卖方向
         /// </summary>
-        public double BuyStampTaxRateByMoney;
+        public TZQThostFtdcDirectionType Direction;
         /// <summary>
-        /// 买印花税率(按手数)
+        /// 印花税率
         /// </summary>
-        public double BuyStampTaxRateByVolume;
+        public double StampTaxRateByMoney;
         /// <summary>
-        /// 卖印花税率
+        /// 印花税率(按手数)
         /// </summary>
-        public double SellStampTaxRateByMoney;
+        public double StampTaxRateByVolume;
         /// <summary>
-        /// 卖印花税率(按手数)
+        /// 过户费率
         /// </summary>
-        public double SellStampTaxRateByVolume;
+        public double TransferFeeRateByMoney;
         /// <summary>
-        /// 买过户费率
+        /// 过户费率(按手数)
         /// </summary>
-        public double BuyTransferFeeRateByMoney;
+        public double TransferFeeRateByVolume;
         /// <summary>
-        /// 买过户费率(按手数)
+        /// 交易费
         /// </summary>
-        public double BuyTransferFeeRateByVolume;
+        public double TradeFeeByMoney;
         /// <summary>
-        /// 卖过户费率
+        /// 交易费(按手数)
         /// </summary>
-        public double SellTransferFeeRateByMoney;
+        public double TradeFeeByVolume;
         /// <summary>
-        /// 卖过户费率(按手数)
+        /// 交易附加费率
         /// </summary>
-        public double SellTransferFeeRateByVolume;
-        /// <summary>
-        /// 买交易费
-        /// </summary>
-        public double BuyTradeFeeByMoney;
-        /// <summary>
-        /// 买交易费(按手数)
-        /// </summary>
-        public double BuyTradeFeeByVolume;
-        /// <summary>
-        /// 卖交易费率
-        /// </summary>
-        public double SellTradeFeeByMoney;
-        /// <summary>
-        /// 卖交易费率(按手数)
-        /// </summary>
-        public double SellTradeFeeByVolume;
-        /// <summary>
-        /// 买交易附加费率
-        /// </summary>
-        public double BuyMarginByMoney;
-        /// <summary>
-        /// 卖交易附加费率
-        /// </summary>
-        public double SellMarginByMoney;
+        public double MarginByMoney;
         /// <summary>
         /// 最小过户费
         /// </summary>
@@ -4166,6 +4146,10 @@ namespace QuantBox.CSharp2CTPZQ
         /// 融券总市值
         /// </summary>
         public double SSStockValue;
+        /// <summary>
+        /// 国债回购占用资金
+        /// </summary>
+        public double BondRepurchaseValue;
     }
 
     /// <summary>
@@ -4331,7 +4315,7 @@ namespace QuantBox.CSharp2CTPZQ
         /// </summary>
         public double MarginTradeFrozenAmount;
         /// <summary>
-        /// 融资买入折算金额
+        /// 融资买入盈亏
         /// </summary>
         public double MarginTradeConversionAmount;
         /// <summary>
@@ -4343,7 +4327,7 @@ namespace QuantBox.CSharp2CTPZQ
         /// </summary>
         public double ShortSellAmount;
         /// <summary>
-        /// 融券卖出折算金额
+        /// 融券卖出盈亏
         /// </summary>
         public double ShortSellConversionAmount;
         /// <summary>
@@ -4454,61 +4438,37 @@ namespace QuantBox.CSharp2CTPZQ
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
         public string InvestorID;
         /// <summary>
-        /// 买印花税率
+        /// 买卖方向
         /// </summary>
-        public double BuyStampTaxRateByMoney;
+        public TZQThostFtdcDirectionType Direction;
         /// <summary>
-        /// 买印花税率(按手数)
+        /// 印花税率
         /// </summary>
-        public double BuyStampTaxRateByVolume;
+        public double StampTaxRateByMoney;
         /// <summary>
-        /// 卖印花税率
+        /// 印花税率(按手数)
         /// </summary>
-        public double SellStampTaxRateByMoney;
+        public double StampTaxRateByVolume;
         /// <summary>
-        /// 卖印花税率(按手数)
+        /// 过户费率
         /// </summary>
-        public double SellStampTaxRateByVolume;
+        public double TransferFeeRateByMoney;
         /// <summary>
-        /// 买过户费率
+        /// 过户费率(按手数)
         /// </summary>
-        public double BuyTransferFeeRateByMoney;
+        public double TransferFeeRateByVolume;
         /// <summary>
-        /// 买过户费率(按手数)
+        /// 交易费
         /// </summary>
-        public double BuyTransferFeeRateByVolume;
+        public double TradeFeeByMoney;
         /// <summary>
-        /// 卖过户费率
+        /// 交易费(按手数)
         /// </summary>
-        public double SellTransferFeeRateByMoney;
+        public double TradeFeeByVolume;
         /// <summary>
-        /// 卖过户费率(按手数)
+        /// 交易附加费率
         /// </summary>
-        public double SellTransferFeeRateByVolume;
-        /// <summary>
-        /// 买交易费
-        /// </summary>
-        public double BuyTradeFeeByMoney;
-        /// <summary>
-        /// 买交易费(按手数)
-        /// </summary>
-        public double BuyTradeFeeByVolume;
-        /// <summary>
-        /// 卖交易费率
-        /// </summary>
-        public double SellTradeFeeByMoney;
-        /// <summary>
-        /// 卖交易费率(按手数)
-        /// </summary>
-        public double SellTradeFeeByVolume;
-        /// <summary>
-        /// 买交易附加费率
-        /// </summary>
-        public double BuyMarginByMoney;
-        /// <summary>
-        /// 卖交易附加费率
-        /// </summary>
-        public double SellMarginByMoney;
+        public double MarginByMoney;
         /// <summary>
         /// 最小过户费
         /// </summary>
