@@ -638,6 +638,8 @@ struct CZQThostFtdcTradingAccountField
 	TZQThostFtdcMoneyType	StockValue;
 	///融券总市值
 	TZQThostFtdcMoneyType	SSStockValue;
+	///国债回购占用资金
+	TZQThostFtdcMoneyType	BondRepurchaseValue;
 };
 
 ///投资者持仓
@@ -719,13 +721,13 @@ struct CZQThostFtdcInvestorPositionField
 	TZQThostFtdcVolumeType	MarginTradeFrozenVolume;
 	///融资买入冻结金额
 	TZQThostFtdcMoneyType	MarginTradeFrozenAmount;
-	///融资买入折算金额
+	///融资买入盈亏
 	TZQThostFtdcMoneyType	MarginTradeConversionAmount;
 	///融券卖出数量
 	TZQThostFtdcVolumeType	ShortSellVolume;
 	///融券卖出金额
 	TZQThostFtdcMoneyType	ShortSellAmount;
-	///融券卖出折算金额
+	///融券卖出盈亏
 	TZQThostFtdcMoneyType	ShortSellConversionAmount;
 	///融券卖出冻结数量
 	TZQThostFtdcVolumeType	ShortSellFrozenVolume;
@@ -779,34 +781,22 @@ struct CZQThostFtdcInstrumentCommissionRateField
 	TZQThostFtdcBrokerIDType	BrokerID;
 	///投资者代码
 	TZQThostFtdcInvestorIDType	InvestorID;
-	///买印花税率
-	TZQThostFtdcRatioType	BuyStampTaxRateByMoney;
-	///买印花税率(按手数)
-	TZQThostFtdcRatioType	BuyStampTaxRateByVolume;
-	///卖印花税率
-	TZQThostFtdcRatioType	SellStampTaxRateByMoney;
-	///卖印花税率(按手数)
-	TZQThostFtdcRatioType	SellStampTaxRateByVolume;
-	///买过户费率
-	TZQThostFtdcRatioType	BuyTransferFeeRateByMoney;
-	///买过户费率(按手数)
-	TZQThostFtdcRatioType	BuyTransferFeeRateByVolume;
-	///卖过户费率
-	TZQThostFtdcRatioType	SellTransferFeeRateByMoney;
-	///卖过户费率(按手数)
-	TZQThostFtdcRatioType	SellTransferFeeRateByVolume;
-	///买交易费
-	TZQThostFtdcRatioType	BuyTradeFeeByMoney;
-	///买交易费(按手数)
-	TZQThostFtdcRatioType	BuyTradeFeeByVolume;
-	///卖交易费率
-	TZQThostFtdcRatioType	SellTradeFeeByMoney;
-	///卖交易费率(按手数)
-	TZQThostFtdcRatioType	SellTradeFeeByVolume;
-	///买交易附加费率
-	TZQThostFtdcRatioType	BuyMarginByMoney;
-	///卖交易附加费率
-	TZQThostFtdcRatioType	SellMarginByMoney;
+	///买卖方向
+	TZQThostFtdcDirectionType	Direction;
+	///印花税率
+	TZQThostFtdcRatioType	StampTaxRateByMoney;
+	///印花税率(按手数)
+	TZQThostFtdcRatioType	StampTaxRateByVolume;
+	///过户费率
+	TZQThostFtdcRatioType	TransferFeeRateByMoney;
+	///过户费率(按手数)
+	TZQThostFtdcRatioType	TransferFeeRateByVolume;
+	///交易费
+	TZQThostFtdcRatioType	TradeFeeByMoney;
+	///交易费(按手数)
+	TZQThostFtdcRatioType	TradeFeeByVolume;
+	///交易附加费率
+	TZQThostFtdcRatioType	MarginByMoney;
 	///最小过户费
 	TZQThostFtdcPriceType	MinTradeFee;
 };
@@ -1971,6 +1961,8 @@ struct CZQThostFtdcSyncingTradingAccountField
 	TZQThostFtdcMoneyType	StockValue;
 	///融券总市值
 	TZQThostFtdcMoneyType	SSStockValue;
+	///国债回购占用资金
+	TZQThostFtdcMoneyType	BondRepurchaseValue;
 };
 
 ///正在同步中的投资者持仓
@@ -2052,13 +2044,13 @@ struct CZQThostFtdcSyncingInvestorPositionField
 	TZQThostFtdcVolumeType	MarginTradeFrozenVolume;
 	///融资买入冻结金额
 	TZQThostFtdcMoneyType	MarginTradeFrozenAmount;
-	///融资买入折算金额
+	///融资买入盈亏
 	TZQThostFtdcMoneyType	MarginTradeConversionAmount;
 	///融券卖出数量
 	TZQThostFtdcVolumeType	ShortSellVolume;
 	///融券卖出金额
 	TZQThostFtdcMoneyType	ShortSellAmount;
-	///融券卖出折算金额
+	///融券卖出盈亏
 	TZQThostFtdcMoneyType	ShortSellConversionAmount;
 	///融券卖出冻结数量
 	TZQThostFtdcVolumeType	ShortSellFrozenVolume;
@@ -2112,34 +2104,22 @@ struct CZQThostFtdcSyncingInstrumentCommissionRateField
 	TZQThostFtdcBrokerIDType	BrokerID;
 	///投资者代码
 	TZQThostFtdcInvestorIDType	InvestorID;
-	///买印花税率
-	TZQThostFtdcRatioType	BuyStampTaxRateByMoney;
-	///买印花税率(按手数)
-	TZQThostFtdcRatioType	BuyStampTaxRateByVolume;
-	///卖印花税率
-	TZQThostFtdcRatioType	SellStampTaxRateByMoney;
-	///卖印花税率(按手数)
-	TZQThostFtdcRatioType	SellStampTaxRateByVolume;
-	///买过户费率
-	TZQThostFtdcRatioType	BuyTransferFeeRateByMoney;
-	///买过户费率(按手数)
-	TZQThostFtdcRatioType	BuyTransferFeeRateByVolume;
-	///卖过户费率
-	TZQThostFtdcRatioType	SellTransferFeeRateByMoney;
-	///卖过户费率(按手数)
-	TZQThostFtdcRatioType	SellTransferFeeRateByVolume;
-	///买交易费
-	TZQThostFtdcRatioType	BuyTradeFeeByMoney;
-	///买交易费(按手数)
-	TZQThostFtdcRatioType	BuyTradeFeeByVolume;
-	///卖交易费率
-	TZQThostFtdcRatioType	SellTradeFeeByMoney;
-	///卖交易费率(按手数)
-	TZQThostFtdcRatioType	SellTradeFeeByVolume;
-	///买交易附加费率
-	TZQThostFtdcRatioType	BuyMarginByMoney;
-	///卖交易附加费率
-	TZQThostFtdcRatioType	SellMarginByMoney;
+	///买卖方向
+	TZQThostFtdcDirectionType	Direction;
+	///印花税率
+	TZQThostFtdcRatioType	StampTaxRateByMoney;
+	///印花税率(按手数)
+	TZQThostFtdcRatioType	StampTaxRateByVolume;
+	///过户费率
+	TZQThostFtdcRatioType	TransferFeeRateByMoney;
+	///过户费率(按手数)
+	TZQThostFtdcRatioType	TransferFeeRateByVolume;
+	///交易费
+	TZQThostFtdcRatioType	TradeFeeByMoney;
+	///交易费(按手数)
+	TZQThostFtdcRatioType	TradeFeeByVolume;
+	///交易附加费率
+	TZQThostFtdcRatioType	MarginByMoney;
 	///最小过户费
 	TZQThostFtdcPriceType	MinTradeFee;
 };

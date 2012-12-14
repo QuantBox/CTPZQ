@@ -65,6 +65,7 @@
 	<error id="MARKETDATA_NOT_FOUND" value="60" prompt="综合交易平台：缺少需要的证券行情"/>
 	<error id="AUTH_FAILED" value="61" prompt="综合交易平台：客户端认证失败"/>
 	<error id="NOT_AUTHENT" value="62" prompt="综合交易平台：客户端未认证"/>
+	<error id="NO_SHORTSELL" value="63" prompt="综合交易平台：没有对应的融券卖出记录"/>
 	<!--转帐系统错误代码 -->
 	<error id="SEND_INSTITUTION_CODE_ERROR" value="1000" prompt="银期转账：发送机构代码错误"/>
 	<error id="NO_GET_PLATFORM_SN" value="1001" prompt="银期转账：取平台流水号错误"/>
