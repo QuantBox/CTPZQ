@@ -14,6 +14,7 @@ namespace QuantBox.CSharp2CTPZQ
     public delegate void fnOnRspQryInstrumentCommissionRate(IntPtr pTraderApi, ref CZQThostFtdcInstrumentCommissionRateField pInstrumentCommissionRate, ref CZQThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast);
     //public delegate void fnOnRspQryInstrumentMarginRate(IntPtr pTraderApi, ref CZQThostFtdcInstrumentMarginRateField pInstrumentMarginRate, ref CZQThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast);
     public delegate void fnOnRspQryInvestorPosition(IntPtr pTraderApi, ref CZQThostFtdcInvestorPositionField pInvestorPosition, ref CZQThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast);
+    public delegate void fnOnRspQryInvestorPositionDetail(IntPtr pTraderApi, ref CZQThostFtdcInvestorPositionDetailField pInvestorPositionDetail, ref CZQThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast);
     public delegate void fnOnRspQryOrder(IntPtr pTraderApi, ref CZQThostFtdcOrderField pOrder, ref CZQThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast);
     public delegate void fnOnRspQryTrade(IntPtr pTraderApi, ref CZQThostFtdcTradeField pTrade, ref CZQThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast);
     public delegate void fnOnRspQryTradingAccount(IntPtr pTraderApi, ref CZQThostFtdcTradingAccountField pTradingAccount, ref CZQThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast);

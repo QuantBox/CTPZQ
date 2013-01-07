@@ -32,6 +32,15 @@ namespace QuantBox.CSharp2CTPZQ
         [DllImport(CommApi.DllFileName, EntryPoint = "CTP_RegOnRspQryInvestorPosition")]
         public static extern void CTP_RegOnRspQryInvestorPosition(IntPtr pMsgQueue, fnOnRspQryInvestorPosition pCallback);
 
+        [DllImport(CommApi.DllFileName, EntryPoint = "CTP_RegOnRspQryInvestorPositionDetail")]
+        public static extern void CTP_RegOnRspQryInvestorPositionDetail(IntPtr pMsgQueue, fnOnRspQryInvestorPositionDetail pCallback);
+
+        [DllImport(CommApi.DllFileName, EntryPoint = "CTP_RegOnRspQryOrder")]
+        public static extern void CTP_RegOnRspQryOrder(IntPtr pMsgQueue, fnOnRspQryOrder pCallback);
+
+        [DllImport(CommApi.DllFileName, EntryPoint = "CTP_RegOnRspQryTrade")]
+        public static extern void CTP_RegOnRspQryTrade(IntPtr pMsgQueue, fnOnRspQryTrade pCallback);
+
         [DllImport(CommApi.DllFileName, EntryPoint = "CTP_RegOnRspQryTradingAccount")]
         public static extern void CTP_RegOnRspQryTradingAccount(IntPtr pMsgQueue, fnOnRspQryTradingAccount pCallback);
 
