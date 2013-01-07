@@ -20,6 +20,7 @@ class CCTPZQMsgQueue
 		E_fnOnRspQryInstrumentCommissionRate,
 		E_fnOnRspQryInstrumentMarginRate,
 		E_fnOnRspQryInvestorPosition,
+		E_fnOnRspQryInvestorPositionDetail,
 		E_fnOnRspQryOrder,
 		E_fnOnRspQryTrade,
 		E_fnOnRspQryTradingAccount,
@@ -46,6 +47,7 @@ class CCTPZQMsgQueue
 			CZQThostFtdcInstrumentCommissionRateField	InstrumentCommissionRate;
 			CZQThostFtdcInstrumentMarginRateField		InstrumentMarginRate;
 			CZQThostFtdcInvestorPositionField			InvestorPosition;
+			CZQThostFtdcInvestorPositionDetailField		InvestorPositionDetail;
 			CZQThostFtdcOrderField						Order;
 			CZQThostFtdcOrderActionField				OrderAction;
 			CZQThostFtdcRspUserLoginField				RspUserLogin;
@@ -74,6 +76,7 @@ public:
 		m_fnOnRspQryInstrumentCommissionRate = NULL;
 		m_fnOnRspQryInstrumentMarginRate = NULL;
 		m_fnOnRspQryInvestorPosition = NULL;
+		m_fnOnRspQryInvestorPositionDetail = NULL;
 		m_fnOnRspQryOrder = NULL;
 		m_fnOnRspQryTrade = NULL;
 		m_fnOnRspQryTradingAccount = NULL;
@@ -111,6 +114,7 @@ public:
 	void RegisterCallback(fnOnRspQryInstrumentCommissionRate pCallback){m_fnOnRspQryInstrumentCommissionRate = pCallback;}
 	void RegisterCallback(fnOnRspQryInstrumentMarginRate pCallback){m_fnOnRspQryInstrumentMarginRate = pCallback;}
 	void RegisterCallback(fnOnRspQryInvestorPosition pCallback){m_fnOnRspQryInvestorPosition = pCallback;}
+	void RegisterCallback(fnOnRspQryInvestorPositionDetail pCallback){m_fnOnRspQryInvestorPositionDetail = pCallback;}
 	void RegisterCallback(fnOnRspQryOrder pCallback){m_fnOnRspQryOrder = pCallback;}
 	void RegisterCallback(fnOnRspQryTrade pCallback){m_fnOnRspQryTrade = pCallback;}
 	void RegisterCallback(fnOnRspQryTradingAccount pCallback){m_fnOnRspQryTradingAccount = pCallback;}
@@ -128,6 +132,7 @@ public:
 	void Input_OnRspOrderInsert(void* pTraderApi,CZQThostFtdcInputOrderField *pInputOrder, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 	void Input_OnRspQryDepthMarketData(void* pTraderApi,CZQThostFtdcDepthMarketDataField *pDepthMarketData, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 	void Input_OnRspQryInvestorPosition(void* pTraderApi,CZQThostFtdcInvestorPositionField *pInvestorPosition, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+	void Input_OnRspQryInvestorPositionDetail(void* pTraderApi,CZQThostFtdcInvestorPositionDetailField *pInvestorPositionDetail, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 	void Input_OnRspQryInstrument(void* pTraderApi,CZQThostFtdcInstrumentField *pInstrument, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 	void Input_OnRspQryInstrumentCommissionRate(void* pTraderApi,CZQThostFtdcInstrumentCommissionRateField *pInstrumentCommissionRate, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 	void Input_OnRspQryInstrumentMarginRate(void* pTraderApi,CZQThostFtdcInstrumentMarginRateField *pInstrumentMarginRate, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
@@ -186,6 +191,11 @@ private:
 	{
 		if(m_fnOnRspQryInvestorPosition)
 			(*m_fnOnRspQryInvestorPosition)(pItem->pApi,&pItem->InvestorPosition,&pItem->RspInfo,pItem->nRequestID,pItem->bIsLast);
+	}
+	void Output_OnRspQryInvestorPositionDetail(SMsgItem* pItem)
+	{
+		if(m_fnOnRspQryInvestorPositionDetail)
+			(*m_fnOnRspQryInvestorPositionDetail)(pItem->pApi,&pItem->InvestorPositionDetail,&pItem->RspInfo,pItem->nRequestID,pItem->bIsLast);
 	}
 	void Output_OnRspQryDepthMarketData(SMsgItem* pItem)
 	{
@@ -258,6 +268,7 @@ private:
 	fnOnRspQryInstrumentCommissionRate	m_fnOnRspQryInstrumentCommissionRate;
 	fnOnRspQryInstrumentMarginRate		m_fnOnRspQryInstrumentMarginRate;
 	fnOnRspQryInvestorPosition			m_fnOnRspQryInvestorPosition;
+	fnOnRspQryInvestorPositionDetail	m_fnOnRspQryInvestorPositionDetail;
 	fnOnRspQryOrder						m_fnOnRspQryOrder;
 	fnOnRspQryTrade						m_fnOnRspQryTrade;
 	fnOnRspQryTradingAccount			m_fnOnRspQryTradingAccount;

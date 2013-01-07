@@ -52,6 +52,7 @@ typedef void (__stdcall *fnOnRspQryInstrument)(void* pTraderApi,CZQThostFtdcInst
 typedef void (__stdcall *fnOnRspQryInstrumentCommissionRate)(void* pTraderApi,CZQThostFtdcInstrumentCommissionRateField *pInstrumentCommissionRate, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 typedef void (__stdcall *fnOnRspQryInstrumentMarginRate)(void* pTraderApi,CZQThostFtdcInstrumentMarginRateField *pInstrumentMarginRate, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 typedef void (__stdcall *fnOnRspQryInvestorPosition)(void* pTraderApi,CZQThostFtdcInvestorPositionField *pInvestorPosition, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+typedef void (__stdcall *fnOnRspQryInvestorPositionDetail)(void* pTraderApi,CZQThostFtdcInvestorPositionDetailField *pInvestorPositionDetail, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 typedef void (__stdcall *fnOnRspQryOrder)(void* pTraderApi,CZQThostFtdcOrderField *pOrder, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 typedef void (__stdcall *fnOnRspQryTrade)(void* pTraderApi,CZQThostFtdcTradeField *pTrade, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 typedef void (__stdcall *fnOnRspQryTradingAccount)(void* pTraderApi,CZQThostFtdcTradingAccountField *pTradingAccount, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
@@ -75,6 +76,7 @@ QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryInstrument(void* pMsgQueue,fnO
 QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryInstrumentCommissionRate(void* pMsgQueue,fnOnRspQryInstrumentCommissionRate pCallback);
 QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryInstrumentMarginRate(void* pMsgQueue,fnOnRspQryInstrumentMarginRate pCallback);
 QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryInvestorPosition(void* pMsgQueue,fnOnRspQryInvestorPosition pCallback);
+QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryInvestorPositionDetail(void* pMsgQueue,fnOnRspQryInvestorPositionDetail pCallback);
 QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryOrder(void* pMsgQueue,fnOnRspQryOrder pCallback);
 QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryTrade(void* pMsgQueue,fnOnRspQryTrade pCallback);
 QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryTradingAccount(void* pMsgQueue,fnOnRspQryTradingAccount pCallback);
@@ -158,6 +160,8 @@ QUANTBOXC2CTPZQ_API void __stdcall TD_Disconnect(void* pTraderApi);
 QUANTBOXC2CTPZQ_API void __stdcall TD_ReleaseTdApi(void* pTraderApi);
 //查综合持仓
 QUANTBOXC2CTPZQ_API void __stdcall TD_ReqQryInvestorPosition(void* pTraderApi,const char* szInstrumentId);
+//查持仓明细
+QUANTBOXC2CTPZQ_API void __stdcall TD_ReqQryInvestorPositionDetail(void* pTraderApi,const char* szInstrumentId);
 //查资金账号
 QUANTBOXC2CTPZQ_API void __stdcall TD_ReqQryTradingAccount(void* pTraderApi);
 //查合约

@@ -122,6 +122,9 @@ void CCTPZQMsgQueue::_Output(SMsgItem* pMsgItem)
 	case E_fnOnRspQryInvestorPosition:
 		Output_OnRspQryInvestorPosition(pMsgItem);
 		break;
+	case E_fnOnRspQryInvestorPositionDetail:
+		Output_OnRspQryInvestorPositionDetail(pMsgItem);
+		break;
 	case E_fnOnRspQryOrder:
 		Output_OnRspQryOrder(pMsgItem);
 		break;
@@ -359,6 +362,30 @@ void CCTPZQMsgQueue::Input_OnRspQryInvestorPosition(void* pTraderApi,CZQThostFtd
 
 		if(pInvestorPosition)
 			pItem->InvestorPosition = *pInvestorPosition;
+		if(pRspInfo)
+			pItem->RspInfo = *pRspInfo;
+
+		_Input(pItem);
+	}
+}
+
+void CCTPZQMsgQueue::Input_OnRspQryInvestorPositionDetail(void* pTraderApi,CZQThostFtdcInvestorPositionDetailField *pInvestorPositionDetail, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+	if(NULL == pInvestorPositionDetail
+		&&NULL == pRspInfo)
+		return;
+
+	SMsgItem* pItem = new SMsgItem;
+	if(pItem)
+	{
+		memset(pItem,0,sizeof(SMsgItem));
+		pItem->type = E_fnOnRspQryInvestorPositionDetail;
+		pItem->pApi = pTraderApi;
+		pItem->nRequestID = nRequestID;
+		pItem->bIsLast = bIsLast;
+
+		if(pInvestorPositionDetail)
+			pItem->InvestorPositionDetail = *pInvestorPositionDetail;
 		if(pRspInfo)
 			pItem->RspInfo = *pRspInfo;
 

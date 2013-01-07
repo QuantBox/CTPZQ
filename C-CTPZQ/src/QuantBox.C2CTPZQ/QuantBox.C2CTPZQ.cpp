@@ -383,6 +383,14 @@ QUANTBOXC2CTPZQ_API void __stdcall TD_ReqQryInvestorPosition(void* pTraderApi,co
 	}
 }
 
+QUANTBOXC2CTPZQ_API void __stdcall TD_ReqQryInvestorPositionDetail(void* pTraderApi,const char* szInstrumentId)
+{
+	if(pTraderApi)
+	{
+		TD_GetApi(pTraderApi)->ReqQryInvestorPositionDetail(NULL==szInstrumentId?"":szInstrumentId);
+	}
+}
+
 QUANTBOXC2CTPZQ_API void __stdcall TD_ReqQryTradingAccount(void* pTraderApi)
 {
 	if(pTraderApi)

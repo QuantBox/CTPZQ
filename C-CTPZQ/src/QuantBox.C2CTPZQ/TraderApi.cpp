@@ -668,6 +668,33 @@ void CTraderApi::OnRspQryInvestorPosition(CZQThostFtdcInvestorPositionField *pIn
 		ReleaseRequestMapBuf(nRequestID);
 }
 
+void CTraderApi::ReqQryInvestorPositionDetail(const string& szInstrumentId)
+{
+	if (NULL == m_pApi)
+		return;
+
+	SRequest* pRequest = MakeRequestBuf(E_QryInvestorPositionDetailField);
+	if (NULL == pRequest)
+		return;
+
+	CZQThostFtdcQryInvestorPositionDetailField& body = pRequest->QryInvestorPositionDetailField;
+
+	strncpy(body.BrokerID, m_RspUserLogin.BrokerID,sizeof(TZQThostFtdcBrokerIDType));
+	strncpy(body.InvestorID, m_RspUserLogin.UserID,sizeof(TZQThostFtdcInvestorIDType));
+	strncpy(body.InstrumentID,szInstrumentId.c_str(),sizeof(TZQThostFtdcInstrumentIDType));
+
+	AddToSendQueue(pRequest);
+}
+
+void CTraderApi::OnRspQryInvestorPositionDetail(CZQThostFtdcInvestorPositionDetailField *pInvestorPositionDetail, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+	if(m_msgQueue)
+		m_msgQueue->Input_OnRspQryInvestorPositionDetail(this,pInvestorPositionDetail,pRspInfo,nRequestID,bIsLast);
+
+	if (bIsLast)
+		ReleaseRequestMapBuf(nRequestID);
+}
+
 void CTraderApi::ReqQryInstrument(const string& szInstrumentId)
 {
 	if (NULL == m_pApi)
