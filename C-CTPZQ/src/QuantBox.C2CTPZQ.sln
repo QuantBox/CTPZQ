@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QuantBox.C2CTPZQ", "QuantBox.C2CTPZQ\QuantBox.C2CTPZQ.vcxproj", "{50C2868A-B6A4-4116-AD6B-63C792F6E681}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QuantBox.C2Level2", "QuantBox.C2Level2\QuantBox.C2Level2.vcxproj", "{7F086AAE-6AA8-4E3F-84C7-C9A6EF2DF297}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{50C2868A-B6A4-4116-AD6B-63C792F6E681}.Debug|Win32.Build.0 = Debug|Win32
 		{50C2868A-B6A4-4116-AD6B-63C792F6E681}.Release|Win32.ActiveCfg = Release|Win32
 		{50C2868A-B6A4-4116-AD6B-63C792F6E681}.Release|Win32.Build.0 = Release|Win32
+		{7F086AAE-6AA8-4E3F-84C7-C9A6EF2DF297}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7F086AAE-6AA8-4E3F-84C7-C9A6EF2DF297}.Debug|Win32.Build.0 = Debug|Win32
+		{7F086AAE-6AA8-4E3F-84C7-C9A6EF2DF297}.Release|Win32.ActiveCfg = Release|Win32
+		{7F086AAE-6AA8-4E3F-84C7-C9A6EF2DF297}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
