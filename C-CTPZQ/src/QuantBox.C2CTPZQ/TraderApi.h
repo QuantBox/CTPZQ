@@ -160,7 +160,7 @@ private:
 
 	//其它
 	virtual void OnRspError(CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
-	virtual void OnRtnInstrumentStatus(CZQThostFtdcInstrumentStatusField *pInstrumentStatus) {};
+	virtual void OnRtnInstrumentStatus(CZQThostFtdcInstrumentStatusField *pInstrumentStatus);
 
 private:
 	ConnectionStatus			m_status;				//连接状态

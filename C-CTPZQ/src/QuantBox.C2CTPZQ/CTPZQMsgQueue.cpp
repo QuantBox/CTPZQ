@@ -137,6 +137,9 @@ void CCTPZQMsgQueue::_Output(SMsgItem* pMsgItem)
 	case E_fnOnRtnDepthMarketData:
 		Output_OnRtnDepthMarketData(pMsgItem);
 		break;
+	case E_fnOnRtnInstrumentStatus:
+		Output_OnRtnInstrumentStatus(pMsgItem);
+		break;
 	case E_fnOnRtnOrder:
 		Output_OnRtnOrder(pMsgItem);
 		break;
@@ -212,6 +215,22 @@ void CCTPZQMsgQueue::Input_OnRtnDepthMarketData(void* pMdApi,CZQThostFtdcDepthMa
 		pItem->type = E_fnOnRtnDepthMarketData;
 		pItem->pApi = pMdApi;
 		pItem->DepthMarketData = *pDepthMarketData;
+
+		_Input(pItem);
+	}
+}
+
+void CCTPZQMsgQueue::Input_OnRtnInstrumentStatus(void* pTraderApi,CZQThostFtdcInstrumentStatusField *pInstrumentStatus)
+{
+	if(NULL == pInstrumentStatus)
+		return;
+
+	SMsgItem* pItem = new SMsgItem;
+	if(pItem)
+	{
+		pItem->type = E_fnOnRtnInstrumentStatus;
+		pItem->pApi = pTraderApi;
+		pItem->InstrumentStatus = *pInstrumentStatus;
 
 		_Input(pItem);
 	}

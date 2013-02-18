@@ -827,3 +827,9 @@ void CTraderApi::OnRspQryTrade(CZQThostFtdcTradeField *pTrade, CZQThostFtdcRspIn
 	if (bIsLast)
 		ReleaseRequestMapBuf(nRequestID);
 }
+
+void CTraderApi::OnRtnInstrumentStatus(CZQThostFtdcInstrumentStatusField *pInstrumentStatus)
+{
+	if(m_msgQueue)
+		m_msgQueue->Input_OnRtnInstrumentStatus(this,pInstrumentStatus);
+}

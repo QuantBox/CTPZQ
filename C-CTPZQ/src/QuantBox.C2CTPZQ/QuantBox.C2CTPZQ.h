@@ -19,6 +19,7 @@ extern "C" {
 
 #include "include\CTPZQ\ThostFtdcUserApiStructSSE.h"
 
+
 //用于分隔输入的合列表，与前置机地址列表，所以不能出现“:”一类的
 #define _QUANTBOXC2CTPZQ_SEPS_ ",;"
 
@@ -57,6 +58,7 @@ typedef void (__stdcall *fnOnRspQryOrder)(void* pTraderApi,CZQThostFtdcOrderFiel
 typedef void (__stdcall *fnOnRspQryTrade)(void* pTraderApi,CZQThostFtdcTradeField *pTrade, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 typedef void (__stdcall *fnOnRspQryTradingAccount)(void* pTraderApi,CZQThostFtdcTradingAccountField *pTradingAccount, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 typedef void (__stdcall *fnOnRtnDepthMarketData)(void* pMdUserApi,CZQThostFtdcDepthMarketDataField *pDepthMarketData);
+typedef void (__stdcall *fnOnRtnInstrumentStatus)(void* pTraderApi,CZQThostFtdcInstrumentStatusField *pInstrumentStatus);
 typedef void (__stdcall *fnOnRtnOrder)(void* pTraderApi,CZQThostFtdcOrderField *pOrder);
 typedef void (__stdcall *fnOnRtnTrade)(void* pTraderApi,CZQThostFtdcTradeField *pTrade);
 
@@ -81,6 +83,7 @@ QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryOrder(void* pMsgQueue,fnOnRspQ
 QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryTrade(void* pMsgQueue,fnOnRspQryTrade pCallback);
 QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryTradingAccount(void* pMsgQueue,fnOnRspQryTradingAccount pCallback);
 QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRtnDepthMarketData(void* pMsgQueue,fnOnRtnDepthMarketData pCallback);
+QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRtnInstrumentStatus(void* pMsgQueue,fnOnRtnInstrumentStatus pCallback);
 QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRtnOrder(void* pMsgQueue,fnOnRtnOrder pCallback);
 QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRtnTrade(void* pMsgQueue,fnOnRtnTrade pCallback);
 

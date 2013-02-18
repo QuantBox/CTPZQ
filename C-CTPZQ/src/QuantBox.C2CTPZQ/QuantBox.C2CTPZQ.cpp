@@ -165,6 +165,14 @@ QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRtnDepthMarketData(void* pMsgQueue,f
 	}
 }
 
+QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRtnInstrumentStatus(void* pMsgQueue,fnOnRtnInstrumentStatus pCallback)
+{
+	if(pMsgQueue)
+	{
+		CTP_GetQueue(pMsgQueue)->RegisterCallback(pCallback);
+	}
+}
+
 QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRtnOrder(void* pMsgQueue,fnOnRtnOrder pCallback)
 {
 	if(pMsgQueue)
