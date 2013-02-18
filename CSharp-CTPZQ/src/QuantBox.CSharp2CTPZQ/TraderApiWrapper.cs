@@ -17,12 +17,13 @@ namespace QuantBox.CSharp2CTPZQ
         public event OnRspQryDepthMarketDataHander OnRspQryDepthMarketData;
         public event OnRspQryInstrumentHander OnRspQryInstrument;
         public event OnRspQryInstrumentCommissionRateHander OnRspQryInstrumentCommissionRate;
-        public event OnRspQryInstrumentMarginRateHander OnRspQryInstrumentMarginRate;
+        //public event OnRspQryInstrumentMarginRateHander OnRspQryInstrumentMarginRate;
         public event OnRspQryInvestorPositionHander OnRspQryInvestorPosition;
         public event OnRspQryInvestorPositionDetailHander OnRspQryInvestorPositionDetail;
         public event OnRspQryOrderHander OnRspQryOrder;
         public event OnRspQryTradeHander OnRspQryTrade;
         public event OnRspQryTradingAccountHander OnRspQryTradingAccount;
+        public event OnRtnInstrumentStatusHander OnRtnInstrumentStatus;
         public event OnRtnOrderHander OnRtnOrder;
         public event OnRtnTradeHander OnRtnTrade;
 
@@ -42,6 +43,7 @@ namespace QuantBox.CSharp2CTPZQ
         private readonly fnOnRspQryOrder _fnOnRspQryOrder_Holder;
         private readonly fnOnRspQryTrade _fnOnRspQryTrade_Holder;
         private readonly fnOnRspQryTradingAccount _fnOnRspQryTradingAccount_Holder;
+        private readonly fnOnRtnInstrumentStatus _fnOnRtnInstrumentStatus_Holder;
         private readonly fnOnRtnOrder _fnOnRtnOrder_Holder;
         private readonly fnOnRtnTrade _fnOnRtnTrade_Holder;
 
@@ -51,6 +53,7 @@ namespace QuantBox.CSharp2CTPZQ
         private IntPtr m_pTdApi = IntPtr.Zero;
         private IntPtr m_pMsgQueue = IntPtr.Zero;
         private volatile bool _bTdConnected;
+        public bool isConnected { get; private set; }
 
         private bool disposed;
 
@@ -81,6 +84,7 @@ namespace QuantBox.CSharp2CTPZQ
             _fnOnRspQryOrder_Holder = OnRspQryOrder_callback;
             _fnOnRspQryTrade_Holder = OnRspQryTrade_callback;
             _fnOnRspQryTradingAccount_Holder = OnRspQryTradingAccount_callback;
+            _fnOnRtnInstrumentStatus_Holder = OnRtnInstrumentStatus_callback;
             _fnOnRtnOrder_Holder = OnRtnOrder_callback;
             _fnOnRtnTrade_Holder = OnRtnTrade_callback;
         }
@@ -160,6 +164,7 @@ namespace QuantBox.CSharp2CTPZQ
                     TraderApi.CTP_RegOnRspQryOrder(m_pMsgQueue, _fnOnRspQryOrder_Holder);
                     TraderApi.CTP_RegOnRspQryTrade(m_pMsgQueue, _fnOnRspQryTrade_Holder);
                     TraderApi.CTP_RegOnRspQryTradingAccount(m_pMsgQueue, _fnOnRspQryTradingAccount_Holder);
+                    TraderApi.CTP_RegOnRtnInstrumentStatus(m_pMsgQueue, _fnOnRtnInstrumentStatus_Holder);
                     TraderApi.CTP_RegOnRtnOrder(m_pMsgQueue, _fnOnRtnOrder_Holder);
                     TraderApi.CTP_RegOnRtnTrade(m_pMsgQueue, _fnOnRtnTrade_Holder);
                     TraderApi.TD_RegMsgQueue2TdApi(m_pTdApi, m_pMsgQueue);
@@ -264,6 +269,10 @@ namespace QuantBox.CSharp2CTPZQ
         private void OnConnect_callback(IntPtr pApi, ref CZQThostFtdcRspUserLoginField pRspUserLogin, ConnectionStatus result)
         {
             _bTdConnected = (ConnectionStatus.E_confirmed == result);
+            if (_bTdConnected)
+            {
+                isConnected = true;
+            }
 
             if (null != OnConnect)
             {
@@ -273,6 +282,16 @@ namespace QuantBox.CSharp2CTPZQ
 
         private void OnDisconnect_callback(IntPtr pApi, ref CZQThostFtdcRspInfoField pRspInfo, ConnectionStatus step)
         {
+            if (isConnected)
+            {
+                if (7 == pRspInfo.ErrorID//综合交易平台：还没有初始化
+                    || 8 == pRspInfo.ErrorID)//综合交易平台：前置不活跃
+                {
+                    Disconnect_TD();
+                    Connect_TD();
+                }
+            }
+
             if (null != OnDisconnect)
             {
                 OnDisconnect(this, new OnDisconnectArgs(pApi, ref pRspInfo, step));
@@ -388,6 +407,14 @@ namespace QuantBox.CSharp2CTPZQ
             if (null != OnRspQryTradingAccount)
             {
                 OnRspQryTradingAccount(this, new OnRspQryTradingAccountArgs(pTraderApi, ref pTradingAccount, ref pRspInfo, nRequestID, bIsLast));
+            }
+        }
+
+        private void OnRtnInstrumentStatus_callback(IntPtr pTraderApi, ref CZQThostFtdcInstrumentStatusField pInstrumentStatus)
+        {
+            if (null != OnRtnInstrumentStatus)
+            {
+                OnRtnInstrumentStatus(this, new OnRtnInstrumentStatusArgs(pTraderApi, ref pInstrumentStatus));
             }
         }
 

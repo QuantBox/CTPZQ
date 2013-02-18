@@ -295,4 +295,15 @@ namespace QuantBox.CSharp2CTPZQ
             this.pTrade = pTrade;
         }
     }
+
+    public class OnRtnInstrumentStatusArgs : EventArgs
+    {
+        public readonly IntPtr pTraderApi;
+        public readonly CZQThostFtdcInstrumentStatusField pInstrumentStatus;
+        public OnRtnInstrumentStatusArgs(IntPtr pTraderApi, ref CZQThostFtdcInstrumentStatusField pInstrumentStatus)
+        {
+            this.pTraderApi = pTraderApi;
+            this.pInstrumentStatus = pInstrumentStatus;
+        }
+    }
 }

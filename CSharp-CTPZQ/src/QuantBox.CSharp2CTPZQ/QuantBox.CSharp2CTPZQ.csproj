@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Callbacks.cs" />
+    <Compile Include="Error.cs" />
     <Compile Include="CommApi.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Enum.cs" />
