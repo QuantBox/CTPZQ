@@ -839,14 +839,6 @@ namespace QuantBox.CSharp2CTPZQ
         /// </summary>
         public TZQThostFtdcPositionDateTypeType PositionDateType;
         /// <summary>
-        /// 多头保证金率
-        /// </summary>
-        public double LongMarginRatio;
-        /// <summary>
-        /// 空头保证金率
-        /// </summary>
-        public double ShortMarginRatio;
-        /// <summary>
         /// 报单能否撤单
         /// </summary>
         public int OrderCanBeWithdraw;
@@ -858,6 +850,11 @@ namespace QuantBox.CSharp2CTPZQ
         /// 最小卖下单单位
         /// </summary>
         public int MinSellVolume;
+        /// <summary>
+        /// 股票权限模版代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
+        public string RightModelID;
     }
 
     /// <summary>
@@ -1867,6 +1864,10 @@ namespace QuantBox.CSharp2CTPZQ
         /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
         public string ExchangeID;
+        /// <summary>
+        /// 股票权限分类
+        /// </summary>
+        public TZQThostFtdcInstrumentRangeType InstrumentRange;
     }
 
     /// <summary>
@@ -4513,6 +4514,10 @@ namespace QuantBox.CSharp2CTPZQ
         /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
         public string ExchangeID;
+        /// <summary>
+        /// 股票权限分类
+        /// </summary>
+        public TZQThostFtdcInstrumentRangeType InstrumentRange;
     }
 
     /// <summary>
@@ -5314,6 +5319,19 @@ namespace QuantBox.CSharp2CTPZQ
         /// 最后修改毫秒
         /// </summary>
         public int UpdateMillisec;
+    }
+
+    /// <summary>
+    /// 行情交易所代码属性
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CZQThostFtdcMarketDataExchangeField
+    {
+        /// <summary>
+        /// 交易所代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string ExchangeID;
     }
 
     /// <summary>

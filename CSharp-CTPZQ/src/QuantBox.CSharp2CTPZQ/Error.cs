@@ -308,46 +308,29 @@ namespace QuantBox.CSharp2CTPZQ
         UNSUPPORTED_OTPTYPE = 59,
 
         /// <summary>
-        /// 综合交易平台：用户在线会话超出上限
+        /// 综合交易平台：缺少需要的证券行情
         /// </summary>
-        SINGLEUSERSESSION_EXCEED_LIMIT = 60,
-
-        /// <summary>
-        /// 综合交易平台：该交易所不支持套利类型报单
-        /// </summary>
-        EXCHANGE_UNSUPPORTED_ARBITRAGE = 61,
-
-        /// <summary>
-        /// 综合交易平台：没有条件单交易权限
-        /// </summary>
-        NO_CONDITIONAL_ORDER_RIGHT = 62,
+        MARKETDATA_NOT_FOUND = 60,
 
         /// <summary>
         /// 综合交易平台：客户端认证失败
         /// </summary>
-        AUTH_FAILED = 63,
+        AUTH_FAILED = 61,
 
         /// <summary>
-        /// 综合交易平台：客户端未认证
+        ///综合交易平台：客户端未认证
         /// </summary>
-        NOT_AUTHENT = 64,
+        NOT_AUTHENT = 62,
 
         /// <summary>
-        /// 综合交易平台：该合约不支持互换类型报单
+        /// 综合交易平台：没有对应的融券卖出记录
         /// </summary>
-        SWAPORDER_UNSUPPORTED = 65,
-
-        // <!--灾备系统错误代码 -->
+        NO_SHORTSELL = 63,
 
         /// <summary>
-        /// 综合交易平台：用户在本系统没有报单权限
+        /// 综合交易平台：缺少必要的信用交易信息
         /// </summary>
-        NO_TRADING_RIGHT_IN_SEPC_DR = 101,
-
-        /// <summary>
-        /// 综合交易平台：系统缺少灾备标示号
-        /// </summary>
-        NO_DR_NO = 102,
+        NO_CREDITINFO = 64,
 
         // <!--转帐系统错误代码 -->
 

@@ -595,11 +595,11 @@ typedef char TZQThostFtdcInstLifePhaseType;
 ///直接还券
 #define THOST_FTDC_D_DirectRepayStock '9'
 ///担保品划转入信用账户
-#define THOST_FTDC_D_TransferSecuritiesIn '10'
+#define THOST_FTDC_D_TransferSecuritiesIn 'a'
 ///担保品划转出信用账户
-#define THOST_FTDC_D_TransferSecuritiesOut '11'
+#define THOST_FTDC_D_TransferSecuritiesOut 'b'
 ///现金替代，只用作回报
-#define THOST_FTDC_D_CashIn '12'
+#define THOST_FTDC_D_CashIn 'c'
 
 typedef char TZQThostFtdcDirectionType;
 
@@ -1366,6 +1366,8 @@ typedef char TZQThostFtdcSystemParamIDType;
 #define THOST_FTDC_TPID_RiskMode 'R'
 ///系统风险算法是否全局 0-否 1-是
 #define THOST_FTDC_TPID_RiskModeGlobal 'G'
+///融资融券买券还券算法
+#define THOST_FTDC_TPID_RepayShortSellAlgo 'S'
 
 typedef char TZQThostFtdcTradeParamIDType;
 
@@ -3986,6 +3988,8 @@ typedef char TZQThostFtdcEventTypeType[33];
 #define THOST_FTDC_EvM_DELETE '3'
 ///复核
 #define THOST_FTDC_EvM_CHECK '4'
+///冲销
+#define THOST_FTDC_EvM_Reverse '7'
 
 typedef char TZQThostFtdcEventModeType;
 
@@ -4220,6 +4224,8 @@ typedef char TZQThostFtdcFutureTypeType;
 #define THOST_FTDC_FET_Credit '3'
 ///投资者可提资金比例
 #define THOST_FTDC_FET_InvestorWithdrawAlm '4'
+///投资者出入金
+#define THOST_FTDC_FET_InvestorFundIO '8'
 
 typedef char TZQThostFtdcFundEventTypeType;
 
@@ -4380,6 +4386,18 @@ typedef char TZQThostFtdcCreationredemptionStatusType;
 #define THOST_FTDC_ETFCRS_Force '2'
 
 typedef char TZQThostFtdcETFCurrenceReplaceStatusType;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcRepayShortSellAlgoType是一个买券还券算法类型
+/////////////////////////////////////////////////////////////////////////
+///默认算法
+#define THOST_FTDC_SSA_Original '0'
+///按还券比例计算
+#define THOST_FTDC_SSA_Ratio '1'
+///Min[1,2]
+#define THOST_FTDC_SSA_Min '2'
+
+typedef char TZQThostFtdcRepayShortSellAlgoType;
 
 /////////////////////////////////////////////////////////////////////////
 ///TFtdcINTEGERType是一个一般整型类型
@@ -4555,6 +4573,118 @@ typedef char TZQThostFtdcAuthInfoType[129];
 ///TFtdcAuthCodeType是一个客户端认证码类型
 /////////////////////////////////////////////////////////////////////////
 typedef char TZQThostFtdcAuthCodeType[17];
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcSysOperTypeType是一个系统日志操作类型类型
+/////////////////////////////////////////////////////////////////////////
+///修改操作员密码
+#define THOST_FTDC_SoT_UpdatePassword '0'
+///操作员组织架构关系
+#define THOST_FTDC_SoT_UserDepartment '1'
+///角色管理
+#define THOST_FTDC_SoT_RoleManager '2'
+///角色功能设置
+#define THOST_FTDC_SoT_RoleFunction '3'
+///基础参数设置
+#define THOST_FTDC_SoT_BaseParam '4'
+///设置操作员
+#define THOST_FTDC_SoT_SetUserID '5'
+///用户角色设置
+#define THOST_FTDC_SoT_SetUserRole '6'
+///用户IP限制
+#define THOST_FTDC_SoT_UserIpRestriction '7'
+///组织架构管理
+#define THOST_FTDC_SoT_DepartmentManager '8'
+///组织架构向查询分类复制
+#define THOST_FTDC_SoT_DepartmentCopy '9'
+///交易编码管理
+#define THOST_FTDC_SoT_Tradingcode 'A'
+///投资者状态维护
+#define THOST_FTDC_SoT_InvestorStatus 'B'
+///投资者权限管理
+#define THOST_FTDC_SoT_InvestorAuthority 'C'
+///属性设置
+#define THOST_FTDC_SoT_PropertySet 'D'
+///重置投资者密码
+#define THOST_FTDC_SoT_ReSetInvestorPasswd 'E'
+///投资者个性信息维护
+#define THOST_FTDC_SoT_InvestorPersonalityInfo 'F'
+
+typedef char TZQThostFtdcSysOperTypeType;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcSysOperModeType是一个系统日志操作方法类型
+/////////////////////////////////////////////////////////////////////////
+///增加
+#define THOST_FTDC_SoM_Add '1'
+///修改
+#define THOST_FTDC_SoM_Update '2'
+///删除
+#define THOST_FTDC_SoM_Delete '3'
+///复制
+#define THOST_FTDC_SoM_Copy '4'
+///激活
+#define THOST_FTDC_SoM_AcTive '5'
+///注销
+#define THOST_FTDC_SoM_CanCel '6'
+///重置
+#define THOST_FTDC_SoM_ReSet '7'
+
+typedef char TZQThostFtdcSysOperModeType;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcCommModelNameType是一个手续费率模板名称类型
+/////////////////////////////////////////////////////////////////////////
+typedef char TZQThostFtdcCommModelNameType[161];
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcCommModelMemoType是一个手续费率模板备注类型
+/////////////////////////////////////////////////////////////////////////
+typedef char TZQThostFtdcCommModelMemoType[1025];
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcAutoIncrementType是一个自增长序号类型
+/////////////////////////////////////////////////////////////////////////
+typedef int TZQThostFtdcAutoIncrementType;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcInstrumentRangeType是一个股票权限分类类型
+/////////////////////////////////////////////////////////////////////////
+///所有
+#define THOST_FTDC_INR_All '1'
+///产品
+#define THOST_FTDC_INR_Product '2'
+///股票权限模版
+#define THOST_FTDC_INR_Model '3'
+///股票
+#define THOST_FTDC_INR_Stock '4'
+
+typedef char TZQThostFtdcInstrumentRangeType;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcRightModelIDType是一个股票权限模版代码类型
+/////////////////////////////////////////////////////////////////////////
+typedef char TZQThostFtdcRightModelIDType[31];
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcRightModelNameType是一个股票权限模版名称类型
+/////////////////////////////////////////////////////////////////////////
+typedef char TZQThostFtdcRightModelNameType[161];
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcRightModelMemoType是一个股票权限模版备注类型
+/////////////////////////////////////////////////////////////////////////
+typedef char TZQThostFtdcRightModelMemoType[1025];
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcYear1Type是一个年份类型
+/////////////////////////////////////////////////////////////////////////
+typedef int TZQThostFtdcYear1Type;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcMonth1Type是一个月份类型
+/////////////////////////////////////////////////////////////////////////
+typedef int TZQThostFtdcMonth1Type;
 
 _SHFE_NS_STOCK_END_
 #endif

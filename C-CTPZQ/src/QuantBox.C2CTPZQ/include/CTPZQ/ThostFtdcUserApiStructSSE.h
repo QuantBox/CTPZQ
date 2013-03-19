@@ -409,16 +409,14 @@ struct CZQThostFtdcInstrumentField
 	TZQThostFtdcPositionTypeType	PositionType;
 	///持仓日期类型
 	TZQThostFtdcPositionDateTypeType	PositionDateType;
-	///多头保证金率
-	TZQThostFtdcRatioType	LongMarginRatio;
-	///空头保证金率
-	TZQThostFtdcRatioType	ShortMarginRatio;
 	///报单能否撤单
 	TZQThostFtdcBoolType	OrderCanBeWithdraw;
 	///最小买下单单位
 	TZQThostFtdcVolumeType	MinBuyVolume;
 	///最小卖下单单位
 	TZQThostFtdcVolumeType	MinSellVolume;
+	///股票权限模版代码
+	TZQThostFtdcRightModelIDType	RightModelID;
 };
 
 ///经纪公司
@@ -909,6 +907,8 @@ struct CZQThostFtdcInstrumentTradingRightField
 	TZQThostFtdcTradingRightType	TradingRight;
 	///交易所代码
 	TZQThostFtdcExchangeIDType	ExchangeID;
+	///股票权限分类
+	TZQThostFtdcInstrumentRangeType	InstrumentRange;
 };
 
 ///经纪公司用户
@@ -2141,6 +2141,8 @@ struct CZQThostFtdcSyncingInstrumentTradingRightField
 	TZQThostFtdcTradingRightType	TradingRight;
 	///交易所代码
 	TZQThostFtdcExchangeIDType	ExchangeID;
+	///股票权限分类
+	TZQThostFtdcInstrumentRangeType	InstrumentRange;
 };
 
 ///查询报单
@@ -2526,6 +2528,13 @@ struct CZQThostFtdcMarketDataField
 	TZQThostFtdcTimeType	UpdateTime;
 	///最后修改毫秒
 	TZQThostFtdcMillisecType	UpdateMillisec;
+};
+
+///行情交易所代码属性
+struct CZQThostFtdcMarketDataExchangeField
+{
+	///交易所代码
+	TZQThostFtdcExchangeIDType	ExchangeID;
 };
 
 ///行情基础属性
