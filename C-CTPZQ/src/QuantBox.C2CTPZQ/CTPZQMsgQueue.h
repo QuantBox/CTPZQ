@@ -61,7 +61,6 @@ class CCTPZQMsgQueue
 public:
 	CCTPZQMsgQueue(void)
 	{
-		m_nSleep = 1;
 		m_hThread = NULL;
 		m_bRunning = false;
 
@@ -86,11 +85,15 @@ public:
 		m_fnOnRtnInstrumentStatus = NULL;
 		m_fnOnRtnOrder = NULL;
 		m_fnOnRtnTrade = NULL;
+
+		m_hEvent = CreateEvent(NULL,FALSE,FALSE,NULL);
 	}
 	virtual ~CCTPZQMsgQueue(void)
 	{
 		StopThread();
 		Clear();
+
+		CloseHandle(m_hEvent);
 	}
 
 public:
@@ -259,7 +262,7 @@ private:
 	}
 
 private:
-	int							m_nSleep;
+	HANDLE						m_hEvent;
 	bool						m_bRunning;
 	HANDLE						m_hThread;
 

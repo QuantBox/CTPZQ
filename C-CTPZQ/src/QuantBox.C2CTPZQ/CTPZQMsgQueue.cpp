@@ -37,6 +37,10 @@ void CCTPZQMsgQueue::StopThread()
 {
 	//停止线程
 	m_bRunning = false;
+	
+	// 线程可能正在Wait，让它结束等待
+	SetEvent(m_hEvent);
+
 	WaitForSingleObject(m_hThread,INFINITE);
 	CloseHandle(m_hThread);
 	m_hThread = NULL;
@@ -52,20 +56,15 @@ DWORD WINAPI ProcessThread(LPVOID lpParam)
 
 void CCTPZQMsgQueue::RunInThread()
 {
-	m_nSleep = 1;
 	while (m_bRunning)
 	{
 		if(Process())
 		{
-			//成功处理了一个
-			m_nSleep = 1;
 		}
 		else
 		{
-			//失败表示队列为空，等待一会再来取为好
-			m_nSleep *= 2;
-			m_nSleep %= 255;//不超过N毫秒
-			Sleep(m_nSleep);
+			//挂起，等事件到来
+			WaitForSingleObject(m_hEvent,INFINITE);
 		}
 	}
 
@@ -79,6 +78,7 @@ void CCTPZQMsgQueue::_Input(SMsgItem* pMsgItem)
 {
 	//由于只内部调用，所以不再检查指针是否有效
 	m_queue.enqueue(pMsgItem);
+	SetEvent(m_hEvent);
 }
 
 void CCTPZQMsgQueue::_Output(SMsgItem* pMsgItem)
