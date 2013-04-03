@@ -29,7 +29,9 @@ void CCTPZQMsgQueue::StartThread()
 	if (NULL == m_hThread)
 	{
 		m_bRunning = true;
-		m_hThread = CreateThread(NULL,0,ProcessThread,this,0,NULL); 
+		m_hThread = CreateThread(NULL,0,ProcessThread,this,CREATE_SUSPENDED,NULL);
+		SetThreadPriority(m_hThread,THREAD_PRIORITY_HIGHEST);
+		ResumeThread(m_hThread); 
 	}
 }
 

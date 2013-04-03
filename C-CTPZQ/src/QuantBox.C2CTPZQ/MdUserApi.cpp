@@ -2,6 +2,7 @@
 #include "MdUserApi.h"
 #include "CTPZQMsgQueue.h"
 #include "include\toolkit.h"
+#include "include\Lock.h"
 
 #include <iostream>
 using namespace std;
@@ -11,11 +12,15 @@ CMdUserApi::CMdUserApi(void)
 	m_msgQueue = NULL;
 	m_status = E_uninit;
 	m_nRequestID = 0;
+
+	InitializeCriticalSection(&m_csMapInstrumentIDs);
 }
 
 CMdUserApi::~CMdUserApi(void)
 {
 	Disconnect();
+
+	DeleteCriticalSection(&m_csMapInstrumentIDs);
 }
 
 void CMdUserApi::RegisterMsgQueue(CCTPZQMsgQueue* pMsgQueue)
@@ -55,7 +60,7 @@ void CMdUserApi::Connect(const string& szPath,
 	sprintf(pszPath,"%s\\Md\\",szPath.c_str());
 	makedirs(pszPath);
 
-	m_pApi = CZQThostFtdcMdApi::CreateFtdcMdApi(pszPath);
+	m_pApi = CZQThostFtdcMdApi::CreateFtdcMdApi(pszPath,(szAddresses.find("udp://") != szAddresses.npos));
 	delete[] pszPath;
 
 	m_status = E_inited;
@@ -76,6 +81,11 @@ void CMdUserApi::Connect(const string& szPath,
 		{
 			if (strlen(token)>0)
 			{
+				char * pch = strstr(token,"udp://");
+				if(pch)
+				{
+					strncpy (pch,"tcp://",6);
+				}
 				m_pApi->RegisterFront(token);
 			}
 			token = strtok( NULL, _QUANTBOXC2CTPZQ_SEPS_);
@@ -136,6 +146,8 @@ void CMdUserApi::Subscribe(const string& szInstrumentIDs,const string& szExchage
 	len = szExchageID.length()+1;
 	char* pExchageID = new char[len];
 	strncpy(pExchageID,szExchageID.c_str(),len);
+
+	CLock cl(&m_csMapInstrumentIDs);
 
 	set<string> _setInstrumentIDs;
 	map<string,set<string> >::iterator it = m_mapInstrumentIDs.find(szExchageID);
@@ -210,6 +222,8 @@ void CMdUserApi::Unsubscribe(const string& szInstrumentIDs,const string& szExcha
 	len = szExchageID.length()+1;
 	char* pExchageID = new char[len];
 	strncpy(pExchageID,szExchageID.c_str(),len);
+
+	CLock cl(&m_csMapInstrumentIDs);
 
 	set<string> _setInstrumentIDs;
 	map<string,set<string> >::iterator it = m_mapInstrumentIDs.find(szExchageID);
@@ -315,6 +329,8 @@ void CMdUserApi::OnRspSubMarketData(CZQThostFtdcSpecificInstrumentField *pSpecif
 	if(!IsErrorRspInfo(pRspInfo,nRequestID,bIsLast)
 		&&pSpecificInstrument)
 	{
+		CLock cl(&m_csMapInstrumentIDs);
+
 		set<string> _setInstrumentIDs;
 		map<string,set<string> >::iterator it = m_mapInstrumentIDs.find(pSpecificInstrument->ExchangeID);
 		if (it!=m_mapInstrumentIDs.end())
@@ -333,6 +349,8 @@ void CMdUserApi::OnRspUnSubMarketData(CZQThostFtdcSpecificInstrumentField *pSpec
 	if(!IsErrorRspInfo(pRspInfo,nRequestID,bIsLast)
 		&&pSpecificInstrument)
 	{
+		CLock cl(&m_csMapInstrumentIDs);
+
 		set<string> _setInstrumentIDs;
 		map<string,set<string> >::iterator it = m_mapInstrumentIDs.find(pSpecificInstrument->ExchangeID);
 		if (it!=m_mapInstrumentIDs.end())
