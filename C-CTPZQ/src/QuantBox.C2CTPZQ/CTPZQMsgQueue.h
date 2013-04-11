@@ -155,9 +155,11 @@ private:
 	void RunInThread();
 
 	//响应结果直接入队列
-	void _Input(SMsgItem* pMsgItem);
+	void _Input_MD(SMsgItem* pMsgItem);
+	void _Input_TD(SMsgItem* pMsgItem);
 	//队列中的消息判断分发
-	void _Output(SMsgItem* pMsgItem);
+	void _Output_MD(SMsgItem* pMsgItem);
+	void _Output_TD(SMsgItem* pMsgItem);
 
 	//响应输出
 	void Output_OnConnect(SMsgItem* pItem)
@@ -262,11 +264,12 @@ private:
 	}
 
 private:
+	volatile bool				m_bRunning;
 	HANDLE						m_hEvent;
-	bool						m_bRunning;
 	HANDLE						m_hThread;
 
-	MSQueue<SMsgItem*>			m_queue;			//响应队列
+	MSQueue<SMsgItem*>			m_queue_MD;			//响应队列
+	MSQueue<SMsgItem*>			m_queue_TD;			//响应队列
 
 	//回调函数指针（按字母排序）
 	fnOnConnect							m_fnOnConnect;
