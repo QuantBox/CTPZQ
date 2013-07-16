@@ -636,8 +636,10 @@ struct CZQThostFtdcTradingAccountField
 	TZQThostFtdcMoneyType	StockValue;
 	///融券总市值
 	TZQThostFtdcMoneyType	SSStockValue;
-	///国债回购占用资金
-	TZQThostFtdcMoneyType	BondRepurchaseValue;
+	///债券正回购资金
+	TZQThostFtdcMoneyType	BondRepurchaseAmount;
+	///债券逆回购占用资金
+	TZQThostFtdcMoneyType	ReverseRepurchaseAmount;
 };
 
 ///投资者持仓
@@ -741,6 +743,12 @@ struct CZQThostFtdcInvestorPositionField
 	TZQThostFtdcVolumeType	TodaySSPosition;
 	///融券总市值
 	TZQThostFtdcMoneyType	SSStockValue;
+	///质押入库数量
+	TZQThostFtdcVolumeType	PledgeInPosition;
+	///今日质押入库冻结数量
+	TZQThostFtdcVolumeType	PledgeInFrozenPosition;
+	///正回购使用的标准券数量
+	TZQThostFtdcVolumeType	RepurchasePosition;
 };
 
 ///合约保证金率
@@ -771,6 +779,8 @@ struct CZQThostFtdcInstrumentMarginRateField
 ///合约手续费率
 struct CZQThostFtdcInstrumentCommissionRateField
 {
+	///交易所代码
+	TZQThostFtdcExchangeIDType	ExchangeID;
 	///合约代码
 	TZQThostFtdcInstrumentIDType	InstrumentID;
 	///投资者范围
@@ -1961,8 +1971,10 @@ struct CZQThostFtdcSyncingTradingAccountField
 	TZQThostFtdcMoneyType	StockValue;
 	///融券总市值
 	TZQThostFtdcMoneyType	SSStockValue;
-	///国债回购占用资金
-	TZQThostFtdcMoneyType	BondRepurchaseValue;
+	///债券正回购资金
+	TZQThostFtdcMoneyType	BondRepurchaseAmount;
+	///债券逆回购占用资金
+	TZQThostFtdcMoneyType	ReverseRepurchaseAmount;
 };
 
 ///正在同步中的投资者持仓
@@ -2066,6 +2078,12 @@ struct CZQThostFtdcSyncingInvestorPositionField
 	TZQThostFtdcVolumeType	TodaySSPosition;
 	///融券总市值
 	TZQThostFtdcMoneyType	SSStockValue;
+	///质押入库数量
+	TZQThostFtdcVolumeType	PledgeInPosition;
+	///今日质押入库冻结数量
+	TZQThostFtdcVolumeType	PledgeInFrozenPosition;
+	///正回购使用的标准券数量
+	TZQThostFtdcVolumeType	RepurchasePosition;
 };
 
 ///正在同步中的合约保证金率
@@ -2096,6 +2114,8 @@ struct CZQThostFtdcSyncingInstrumentMarginRateField
 ///正在同步中的合约手续费率
 struct CZQThostFtdcSyncingInstrumentCommissionRateField
 {
+	///交易所代码
+	TZQThostFtdcExchangeIDType	ExchangeID;
 	///合约代码
 	TZQThostFtdcInstrumentIDType	InstrumentID;
 	///投资者范围
@@ -2385,6 +2405,8 @@ struct CZQThostFtdcQryExchangeField
 ///查询产品
 struct CZQThostFtdcQryProductField
 {
+	///交易所代码
+	TZQThostFtdcExchangeIDType	ExchangeID;
 	///产品代码
 	TZQThostFtdcInstrumentIDType	ProductID;
 };
@@ -2769,6 +2791,8 @@ struct CZQThostFtdcQryInvestorPositionDetailField
 	TZQThostFtdcInvestorIDType	InvestorID;
 	///合约代码
 	TZQThostFtdcInstrumentIDType	InstrumentID;
+	///交易所代码
+	TZQThostFtdcExchangeIDType	ExchangeID;
 };
 
 ///投资者持仓明细
@@ -2820,6 +2844,12 @@ struct CZQThostFtdcInvestorPositionDetailField
 	TZQThostFtdcMoneyType	Commission;
 	///融资融券金额
 	TZQThostFtdcMoneyType	Amount;
+	///质押入库数量
+	TZQThostFtdcVolumeType	PledgeInPosition;
+	///今日质押入库冻结数量
+	TZQThostFtdcVolumeType	PledgeInFrozenPosition;
+	///正回购使用的标准券数量
+	TZQThostFtdcVolumeType	RepurchasePosition;
 };
 
 ///资金账户口令域
@@ -5391,6 +5421,10 @@ struct CZQThostFtdcTransferSerialField
 	TZQThostFtdcOperatorCodeType	OperatorCode;
 	///新银行帐号
 	TZQThostFtdcBankAccountType	BankNewAccount;
+	///用户代码
+	TZQThostFtdcUserIDType	UserID;
+	///摘要
+	TZQThostFtdcDigestType	Digest;
 	///错误代码
 	TZQThostFtdcErrorIDType	ErrorID;
 	///错误信息
@@ -5563,17 +5597,153 @@ struct CZQThostFtdcNotifySyncKeyField
 	TZQThostFtdcErrorMsgType	ErrorMsg;
 };
 
-///客户最大持仓数量
-struct CZQThostFtdcMaxStockPositionAmountField
+///客户最大持仓限制
+struct CZQThostFtdcMaxStockPositionLimitField
 {
 	///经纪公司代码
 	TZQThostFtdcBrokerIDType	BrokerID;
 	///投资者代码
 	TZQThostFtdcInvestorIDType	InvestorID;
+	///交易所代码
+	TZQThostFtdcExchangeIDType	ExchangeID;
 	///合约代码
 	TZQThostFtdcInstrumentIDType	InstrumentID;
-	///最大持仓数量
-	TZQThostFtdcVolumeType	MaxAmount;
+	///股本类型
+	TZQThostFtdcCapitalStockTypeType	CapitalStockType;
+	///最大持仓数量占股本的比例
+	TZQThostFtdcRatioType	Ratio;
+};
+
+///资金转入转出请求
+struct CZQThostFtdcReqFundIOCTPAccountField
+{
+	///证券公司代码
+	TZQThostFtdcBrokerIDType	BrokerID;
+	///投资者代码
+	TZQThostFtdcInvestorIDType	InvestorID;
+	///投资者资金帐号
+	TZQThostFtdcAccountIDType	AccountID;
+	///资金帐户密码
+	TZQThostFtdcPasswordType	Password;
+	///用户代码
+	TZQThostFtdcUserIDType	UserID;
+	///会话编号
+	TZQThostFtdcSessionIDType	SessionID;
+	///CTP核心流水号
+	TZQThostFtdcFutureSerialType	CTPSerial;
+	///转账平台流水号
+	TZQThostFtdcPlateSerialType	PlateSerial;
+	///第三方流水号
+	TZQThostFtdcBankSerialType	SettlementSerial;
+	///交易金额
+	TZQThostFtdcTradeAmountType	TradeAmount;
+	///交易日
+	TZQThostFtdcDateType	TradingDay;
+	///转账时间
+	TZQThostFtdcTimeType	TradeTime;
+	///摘要
+	TZQThostFtdcDigestType	Digest;
+};
+
+///资金转入转出应答
+struct CZQThostFtdcRspFundIOCTPAccountField
+{
+	///证券公司代码
+	TZQThostFtdcBrokerIDType	BrokerID;
+	///投资者代码
+	TZQThostFtdcInvestorIDType	InvestorID;
+	///投资者资金帐号
+	TZQThostFtdcAccountIDType	AccountID;
+	///资金帐户密码
+	TZQThostFtdcPasswordType	Password;
+	///用户代码
+	TZQThostFtdcUserIDType	UserID;
+	///会话编号
+	TZQThostFtdcSessionIDType	SessionID;
+	///CTP核心流水号
+	TZQThostFtdcFutureSerialType	CTPSerial;
+	///转账平台流水号
+	TZQThostFtdcPlateSerialType	PlateSerial;
+	///第三方流水号
+	TZQThostFtdcBankSerialType	SettlementSerial;
+	///交易金额
+	TZQThostFtdcTradeAmountType	TradeAmount;
+	///交易日
+	TZQThostFtdcDateType	TradingDay;
+	///转账时间
+	TZQThostFtdcTimeType	TradeTime;
+	///摘要
+	TZQThostFtdcDigestType	Digest;
+	///出入金方向
+	TZQThostFtdcFundDirectionType	FundDirection;
+};
+
+///债券利息
+struct CZQThostFtdcBondInterestField
+{
+	///交易日
+	TZQThostFtdcDateType	TradingDay;
+	///交易所代码
+	TZQThostFtdcExchangeIDType	ExchangeID;
+	///合约代码
+	TZQThostFtdcInstrumentIDType	InstrumentID;
+	///利息
+	TZQThostFtdcInterestType	Interest;
+};
+
+///查询债券利息
+struct CZQThostFtdcQryBondInterestField
+{
+	///交易所代码
+	TZQThostFtdcExchangeIDType	ExchangeID;
+	///合约代码
+	TZQThostFtdcInstrumentIDType	InstrumentID;
+};
+
+///查询资金转入转出CTP
+struct CZQThostFtdcQryFundIOCTPAccountField
+{
+	///经纪公司代码
+	TZQThostFtdcBrokerIDType	BrokerID;
+	///投资者资金帐号
+	TZQThostFtdcAccountIDType	AccountID;
+};
+
+///资金转入转出CTP
+struct CZQThostFtdcFundIOCTPAccountField
+{
+	///证券公司代码
+	TZQThostFtdcBrokerIDType	BrokerID;
+	///投资者代码
+	TZQThostFtdcInvestorIDType	InvestorID;
+	///投资者资金帐号
+	TZQThostFtdcAccountIDType	AccountID;
+	///资金帐户密码
+	TZQThostFtdcPasswordType	Password;
+	///用户代码
+	TZQThostFtdcUserIDType	UserID;
+	///会话编号
+	TZQThostFtdcSessionIDType	SessionID;
+	///CTP核心流水号
+	TZQThostFtdcFutureSerialType	CTPSerial;
+	///转账平台流水号
+	TZQThostFtdcPlateSerialType	PlateSerial;
+	///第三方流水号
+	TZQThostFtdcBankSerialType	SettlementSerial;
+	///交易金额
+	TZQThostFtdcTradeAmountType	TradeAmount;
+	///交易日
+	TZQThostFtdcDateType	TradingDay;
+	///转账时间
+	TZQThostFtdcTimeType	TradeTime;
+	///摘要
+	TZQThostFtdcDigestType	Digest;
+	///出入金方向
+	TZQThostFtdcFundDirectionType	FundDirection;
+	///错误代码
+	TZQThostFtdcErrorIDType	ErrorID;
+	///错误信息
+	TZQThostFtdcErrorMsgType	ErrorMsg;
 };
 
 

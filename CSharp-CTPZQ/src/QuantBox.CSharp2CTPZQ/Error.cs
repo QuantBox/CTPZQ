@@ -635,9 +635,9 @@ namespace QuantBox.CSharp2CTPZQ
         OVERETFCASHRATIO = 3010,
 
         /// <summary>
-        /// 综合交易平台：ETF申赎不能撤单
+        /// 综合交易平台：不能撤单
         /// </summary
-        ETF_PURRED_NOTSUPCALCEL = 3011,
+        ORDER_NOTSUPCALCEL = 3011,
 
         /// <summary>
         /// 综合交易平台：非信用账户不支持此类交易
@@ -663,6 +663,26 @@ namespace QuantBox.CSharp2CTPZQ
         /// 综合交易平台：融资金额超过上限
         /// </summary
         INSUFFICIENT_MARGINCREDIT = 3016,
+
+        /// <summary>
+        /// 综合交易平台：正回购的放大倍数超限
+        /// </summary
+        INSUFFICIENT_REPURCHASETIMES = 3017,
+
+        /// <summary>
+        /// 综合交易平台：找不到ETF申购赎回信息
+        /// </summary
+        ETFINSTRUMENT_NOT_FUND = 3018,
+
+        /// <summary>
+        /// 综合交易平台：无法找到债券质押为标准券比例
+        /// </summary
+        BONDPLEDGERATE_NOT_FOUND = 3019,
+
+        /// <summary>
+        /// 综合交易平台：无法找到债券质押对照关系
+        /// </summary
+        BONDPLEDGE_NOT_FOUND = 3020,
         // <!-- add for Stock end -->
     }
 }

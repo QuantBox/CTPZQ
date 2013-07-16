@@ -131,11 +131,15 @@
 	<error id="UNAUTHENTNOTVALIDFORTRADE" value="3008" prompt="综合交易平台：未认证的用户没有下单权限"/>
 	<error id="OVERAMOUNTLIMIT" value="3009" prompt="综合交易平台：买入超过持仓数量限制"/>
 	<error id="OVERETFCASHRATIO" value="3010" prompt="综合交易平台：现金替换金额超过限制"/>
-	<error id="ETF_PURRED_NOTSUPCALCEL" value="3011" prompt="综合交易平台：ETF申赎不能撤单"/>
+	<error id="ORDER_NOTSUPCALCEL" value="3011" prompt="综合交易平台：不能撤单"/>
 	<error id="INVALID_FOR_CREDITACCOUNT" value="3012" prompt="综合交易平台：非信用账户不支持此类交易"/>
 	<error id="CONVERSIONRATE_NOT_FOUND" value="3013" prompt="综合交易平台：无法找到此产品的折扣率"/>
 	<error id="INSTEUMENT_CANNOT_MT" value="3014" prompt="综合交易平台：此合约不能融资交易"/>
 	<error id="INSTEUMENT_CANNOT_SS" value="3015" prompt="综合交易平台：此合约不能融券交易"/>
 	<error id="INSUFFICIENT_MARGINCREDIT" value="3016" prompt="综合交易平台：融资金额超过上限"/>
+	<error id="INSUFFICIENT_REPURCHASETIMES" value="3017" prompt="综合交易平台：正回购的放大倍数超限"/>
+	<error id="ETFINSTRUMENT_NOT_FUND" value="3018" prompt="综合交易平台：找不到ETF申购赎回信息"/>
+	<error id="BONDPLEDGERATE_NOT_FOUND" value="3019" prompt="综合交易平台：无法找到债券质押为标准券比例"/>
+	<error id="BONDPLEDGE_NOT_FOUND" value="3020" prompt="综合交易平台：无法找到债券质押对照关系"/>
 	<!-- add for Stock end -->
 </errors>

@@ -600,6 +600,12 @@ typedef char TZQThostFtdcInstLifePhaseType;
 #define THOST_FTDC_D_TransferSecuritiesOut 'b'
 ///现金替代，只用作回报
 #define THOST_FTDC_D_CashIn 'c'
+///债券质押入库,深圳无质押代码,以此区分是质押入库
+#define THOST_FTDC_D_PledgeBondIn 'd'
+///债券质押出库,深圳无质押代码,以此区分是质押入库
+#define THOST_FTDC_D_PledgeBondOut 'e'
+///配股
+#define THOST_FTDC_D_Rationed 'f'
 
 typedef char TZQThostFtdcDirectionType;
 
@@ -4685,6 +4691,26 @@ typedef int TZQThostFtdcYear1Type;
 ///TFtdcMonth1Type是一个月份类型
 /////////////////////////////////////////////////////////////////////////
 typedef int TZQThostFtdcMonth1Type;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcCapitalStockTypeType是一个股本类型类型
+/////////////////////////////////////////////////////////////////////////
+///总通股本
+#define THOST_FTDC_CPTSTOCK_TOTALSTOCK '1'
+///流通股本
+#define THOST_FTDC_CPTSTOCK_CIRCULATION '2'
+
+typedef char TZQThostFtdcCapitalStockTypeType;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcRepurchaseMaxTimesType是一个正回购放大倍数类型
+/////////////////////////////////////////////////////////////////////////
+typedef double TZQThostFtdcRepurchaseMaxTimesType;
+
+/////////////////////////////////////////////////////////////////////////
+///TFtdcInterestType是一个利息类型
+/////////////////////////////////////////////////////////////////////////
+typedef double TZQThostFtdcInterestType;
 
 _SHFE_NS_STOCK_END_
 #endif

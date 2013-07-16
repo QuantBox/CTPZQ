@@ -772,7 +772,22 @@ namespace QuantBox.CSharp2CTPZQ
         /// <summary>
         /// 现金替代，只用作回报
         /// </summary>
-        CashIn = (byte)'c'
+        CashIn = (byte)'c',
+
+        /// <summary>
+        /// 债券质押入库,深圳无质押代码,以此区分是质押入库
+        /// </summary>
+        PledgeBondIn = (byte)'d',
+
+        /// <summary>
+        /// 债券质押出库,深圳无质押代码,以此区分是质押入库
+        /// </summary>
+        PledgeBondOut = (byte)'e',
+
+        /// <summary>
+        /// 配股
+        /// </summary>
+        Rationed = (byte)'f'
     }
 
     /// <summary>
@@ -5290,5 +5305,21 @@ namespace QuantBox.CSharp2CTPZQ
         /// 股票
         /// </summary>
         Stock = (byte)'4'
+    }
+
+    /// <summary>
+    /// TFtdcCapitalStockTypeType是一个股本类型类型
+    /// </summary>
+    public enum TZQThostFtdcCapitalStockTypeType : byte
+    {
+        /// <summary>
+        /// 总通股本
+        /// </summary>
+        TOTALSTOCK = (byte)'1',
+
+        /// <summary>
+        /// 流通股本
+        /// </summary>
+        CIRCULATION = (byte)'2'
     }
 }

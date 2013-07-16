@@ -70,9 +70,6 @@ public:
 	///报单操作请求响应
 	virtual void OnRspOrderAction(CZQThostFtdcInputOrderActionField *pInputOrderAction, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
 
-	///查询最大报单数量响应
-	virtual void OnRspQueryMaxOrderVolume(CZQThostFtdcQueryMaxOrderVolumeField *pQueryMaxOrderVolume, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
-
 	///请求查询报单响应
 	virtual void OnRspQryOrder(CZQThostFtdcOrderField *pOrder, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
 
@@ -106,6 +103,9 @@ public:
 	///请求查询投资者持仓明细响应
 	virtual void OnRspQryInvestorPositionDetail(CZQThostFtdcInvestorPositionDetailField *pInvestorPositionDetail, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
 
+	///请求查询债券利息响应
+	virtual void OnRspQryBondInterest(CZQThostFtdcBondInterestField *pBondInterest, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
 	///错误应答
 	virtual void OnRspError(CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
 
@@ -123,6 +123,18 @@ public:
 
 	///合约交易状态通知
 	virtual void OnRtnInstrumentStatus(CZQThostFtdcInstrumentStatusField *pInstrumentStatus) {};
+
+	///资金转入CTP通知
+	virtual void OnRtnFundIntoCTPAccount(CZQThostFtdcFundIOCTPAccountField *pFundIOCTPAccount) {};
+
+	///资金转出CTP请求应答
+	virtual void OnRspFundOutCTPAccount(CZQThostFtdcRspFundIOCTPAccountField *pRspFundIOCTPAccount, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
+	///资金转出CTP通知
+	virtual void OnRtnFundOutCTPAccount(CZQThostFtdcFundIOCTPAccountField *pFundIOCTPAccount) {};
+
+	///资金转入转出CTP查询应答
+	virtual void OnRspQryFundIOCTPAccount(CZQThostFtdcFundIOCTPAccountField *pFundIOCTPAccount, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
 };
 
 class TRADER_API_EXPORT CZQThostFtdcTraderApi
@@ -199,9 +211,6 @@ public:
 	///报单操作请求
 	virtual int ReqOrderAction(CZQThostFtdcInputOrderActionField *pInputOrderAction, int nRequestID) = 0;
 
-	///查询最大报单数量请求
-	virtual int ReqQueryMaxOrderVolume(CZQThostFtdcQueryMaxOrderVolumeField *pQueryMaxOrderVolume, int nRequestID) = 0;
-
 	///请求查询报单
 	virtual int ReqQryOrder(CZQThostFtdcQryOrderField *pQryOrder, int nRequestID) = 0;
 
@@ -234,6 +243,15 @@ public:
 
 	///请求查询投资者持仓明细
 	virtual int ReqQryInvestorPositionDetail(CZQThostFtdcQryInvestorPositionDetailField *pQryInvestorPositionDetail, int nRequestID) = 0;
+
+	///请求查询债券利息
+	virtual int ReqQryBondInterest(CZQThostFtdcQryBondInterestField *pQryBondInterest, int nRequestID) = 0;
+
+	///资金转出CTP请求请求
+	virtual int ReqFundOutCTPAccount(CZQThostFtdcReqFundIOCTPAccountField *pReqFundIOCTPAccount, int nRequestID) = 0;
+
+	///资金转入转出CTP查询请求
+	virtual int ReqQryFundIOCTPAccount(CZQThostFtdcQryFundIOCTPAccountField *pQryFundIOCTPAccount, int nRequestID) = 0;
 protected:
 	~CZQThostFtdcTraderApi(){};
 };

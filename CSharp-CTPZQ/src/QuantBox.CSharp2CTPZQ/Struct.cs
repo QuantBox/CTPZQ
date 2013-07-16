@@ -1313,9 +1313,13 @@ namespace QuantBox.CSharp2CTPZQ
         /// </summary>
         public double SSStockValue;
         /// <summary>
-        /// 国债回购占用资金
+        /// 债券正回购资金
         /// </summary>
-        public double BondRepurchaseValue;
+        public double BondRepurchaseAmount;
+        /// <summary>
+        /// 债券逆回购占用资金
+        /// </summary>
+        public double ReverseRepurchaseAmount;
     }
 
     /// <summary>
@@ -1525,6 +1529,18 @@ namespace QuantBox.CSharp2CTPZQ
         /// 融券总市值
         /// </summary>
         public double SSStockValue;
+        /// <summary>
+        /// 质押入库数量
+        /// </summary>
+        public int PledgeInPosition;
+        /// <summary>
+        /// 今日质押入库冻结数量
+        /// </summary>
+        public int PledgeInFrozenPosition;
+        /// <summary>
+        /// 正回购使用的标准券数量
+        /// </summary>
+        public int RepurchasePosition;
     }
 
     /// <summary>
@@ -1584,6 +1600,11 @@ namespace QuantBox.CSharp2CTPZQ
     [StructLayout(LayoutKind.Sequential)]
     public struct CZQThostFtdcInstrumentCommissionRateField
     {
+        /// <summary>
+        /// 交易所代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string ExchangeID;
         /// <summary>
         /// 合约代码
         /// </summary>
@@ -4148,9 +4169,13 @@ namespace QuantBox.CSharp2CTPZQ
         /// </summary>
         public double SSStockValue;
         /// <summary>
-        /// 国债回购占用资金
+        /// 债券正回购资金
         /// </summary>
-        public double BondRepurchaseValue;
+        public double BondRepurchaseAmount;
+        /// <summary>
+        /// 债券逆回购占用资金
+        /// </summary>
+        public double ReverseRepurchaseAmount;
     }
 
     /// <summary>
@@ -4360,6 +4385,18 @@ namespace QuantBox.CSharp2CTPZQ
         /// 融券总市值
         /// </summary>
         public double SSStockValue;
+        /// <summary>
+        /// 质押入库数量
+        /// </summary>
+        public int PledgeInPosition;
+        /// <summary>
+        /// 今日质押入库冻结数量
+        /// </summary>
+        public int PledgeInFrozenPosition;
+        /// <summary>
+        /// 正回购使用的标准券数量
+        /// </summary>
+        public int RepurchasePosition;
     }
 
     /// <summary>
@@ -4419,6 +4456,11 @@ namespace QuantBox.CSharp2CTPZQ
     [StructLayout(LayoutKind.Sequential)]
     public struct CZQThostFtdcSyncingInstrumentCommissionRateField
     {
+        /// <summary>
+        /// 交易所代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string ExchangeID;
         /// <summary>
         /// 合约代码
         /// </summary>
@@ -5020,6 +5062,11 @@ namespace QuantBox.CSharp2CTPZQ
     [StructLayout(LayoutKind.Sequential)]
     public struct CZQThostFtdcQryProductField
     {
+        /// <summary>
+        /// 交易所代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string ExchangeID;
         /// <summary>
         /// 产品代码
         /// </summary>
@@ -5792,6 +5839,11 @@ namespace QuantBox.CSharp2CTPZQ
         /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string InstrumentID;
+        /// <summary>
+        /// 交易所代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string ExchangeID;
     }
 
     /// <summary>
@@ -5899,6 +5951,18 @@ namespace QuantBox.CSharp2CTPZQ
         /// 融资融券金额
         /// </summary>
         public double Amount;
+        /// <summary>
+        /// 质押入库数量
+        /// </summary>
+        public int PledgeInPosition;
+        /// <summary>
+        /// 今日质押入库冻结数量
+        /// </summary>
+        public int PledgeInFrozenPosition;
+        /// <summary>
+        /// 正回购使用的标准券数量
+        /// </summary>
+        public int RepurchasePosition;
     }
 
     /// <summary>
@@ -11555,6 +11619,16 @@ namespace QuantBox.CSharp2CTPZQ
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 41)]
         public string BankNewAccount;
         /// <summary>
+        /// 用户代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
+        public string UserID;
+        /// <summary>
+        /// 摘要
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 36)]
+        public string Digest;
+        /// <summary>
         /// 错误代码
         /// </summary>
         public int ErrorID;
@@ -11942,10 +12016,10 @@ namespace QuantBox.CSharp2CTPZQ
     }
 
     /// <summary>
-    /// 客户最大持仓数量
+    /// 客户最大持仓限制
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct CZQThostFtdcMaxStockPositionAmountField
+    public struct CZQThostFtdcMaxStockPositionLimitField
     {
         /// <summary>
         /// 经纪公司代码
@@ -11958,13 +12032,309 @@ namespace QuantBox.CSharp2CTPZQ
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
         public string InvestorID;
         /// <summary>
+        /// 交易所代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string ExchangeID;
+        /// <summary>
         /// 合约代码
         /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string InstrumentID;
         /// <summary>
-        /// 最大持仓数量
+        /// 股本类型
         /// </summary>
-        public int MaxAmount;
+        public TZQThostFtdcCapitalStockTypeType CapitalStockType;
+        /// <summary>
+        /// 最大持仓数量占股本的比例
+        /// </summary>
+        public double Ratio;
+    }
+
+    /// <summary>
+    /// 资金转入转出请求
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CZQThostFtdcReqFundIOCTPAccountField
+    {
+        /// <summary>
+        /// 证券公司代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 11)]
+        public string BrokerID;
+        /// <summary>
+        /// 投资者代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
+        public string InvestorID;
+        /// <summary>
+        /// 投资者资金帐号
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
+        public string AccountID;
+        /// <summary>
+        /// 资金帐户密码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 41)]
+        public string Password;
+        /// <summary>
+        /// 用户代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
+        public string UserID;
+        /// <summary>
+        /// 会话编号
+        /// </summary>
+        public int SessionID;
+        /// <summary>
+        /// CTP核心流水号
+        /// </summary>
+        public int CTPSerial;
+        /// <summary>
+        /// 转账平台流水号
+        /// </summary>
+        public int PlateSerial;
+        /// <summary>
+        /// 第三方流水号
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 13)]
+        public string SettlementSerial;
+        /// <summary>
+        /// 交易金额
+        /// </summary>
+        public double TradeAmount;
+        /// <summary>
+        /// 交易日
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string TradingDay;
+        /// <summary>
+        /// 转账时间
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string TradeTime;
+        /// <summary>
+        /// 摘要
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 36)]
+        public string Digest;
+    }
+
+    /// <summary>
+    /// 资金转入转出应答
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CZQThostFtdcRspFundIOCTPAccountField
+    {
+        /// <summary>
+        /// 证券公司代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 11)]
+        public string BrokerID;
+        /// <summary>
+        /// 投资者代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
+        public string InvestorID;
+        /// <summary>
+        /// 投资者资金帐号
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
+        public string AccountID;
+        /// <summary>
+        /// 资金帐户密码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 41)]
+        public string Password;
+        /// <summary>
+        /// 用户代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
+        public string UserID;
+        /// <summary>
+        /// 会话编号
+        /// </summary>
+        public int SessionID;
+        /// <summary>
+        /// CTP核心流水号
+        /// </summary>
+        public int CTPSerial;
+        /// <summary>
+        /// 转账平台流水号
+        /// </summary>
+        public int PlateSerial;
+        /// <summary>
+        /// 第三方流水号
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 13)]
+        public string SettlementSerial;
+        /// <summary>
+        /// 交易金额
+        /// </summary>
+        public double TradeAmount;
+        /// <summary>
+        /// 交易日
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string TradingDay;
+        /// <summary>
+        /// 转账时间
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string TradeTime;
+        /// <summary>
+        /// 摘要
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 36)]
+        public string Digest;
+        /// <summary>
+        /// 出入金方向
+        /// </summary>
+        public TZQThostFtdcFundDirectionType FundDirection;
+    }
+
+    /// <summary>
+    /// 债券利息
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CZQThostFtdcBondInterestField
+    {
+        /// <summary>
+        /// 交易日
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string TradingDay;
+        /// <summary>
+        /// 交易所代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string ExchangeID;
+        /// <summary>
+        /// 合约代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
+        public string InstrumentID;
+        /// <summary>
+        /// 利息
+        /// </summary>
+        public double Interest;
+    }
+
+    /// <summary>
+    /// 查询债券利息
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CZQThostFtdcQryBondInterestField
+    {
+        /// <summary>
+        /// 交易所代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string ExchangeID;
+        /// <summary>
+        /// 合约代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
+        public string InstrumentID;
+    }
+
+    /// <summary>
+    /// 查询资金转入转出CTP
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CZQThostFtdcQryFundIOCTPAccountField
+    {
+        /// <summary>
+        /// 经纪公司代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 11)]
+        public string BrokerID;
+        /// <summary>
+        /// 投资者资金帐号
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
+        public string AccountID;
+    }
+
+    /// <summary>
+    /// 资金转入转出CTP
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CZQThostFtdcFundIOCTPAccountField
+    {
+        /// <summary>
+        /// 证券公司代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 11)]
+        public string BrokerID;
+        /// <summary>
+        /// 投资者代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
+        public string InvestorID;
+        /// <summary>
+        /// 投资者资金帐号
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
+        public string AccountID;
+        /// <summary>
+        /// 资金帐户密码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 41)]
+        public string Password;
+        /// <summary>
+        /// 用户代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
+        public string UserID;
+        /// <summary>
+        /// 会话编号
+        /// </summary>
+        public int SessionID;
+        /// <summary>
+        /// CTP核心流水号
+        /// </summary>
+        public int CTPSerial;
+        /// <summary>
+        /// 转账平台流水号
+        /// </summary>
+        public int PlateSerial;
+        /// <summary>
+        /// 第三方流水号
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 13)]
+        public string SettlementSerial;
+        /// <summary>
+        /// 交易金额
+        /// </summary>
+        public double TradeAmount;
+        /// <summary>
+        /// 交易日
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string TradingDay;
+        /// <summary>
+        /// 转账时间
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        public string TradeTime;
+        /// <summary>
+        /// 摘要
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 36)]
+        public string Digest;
+        /// <summary>
+        /// 出入金方向
+        /// </summary>
+        public TZQThostFtdcFundDirectionType FundDirection;
+        /// <summary>
+        /// 错误代码
+        /// </summary>
+        public int ErrorID;
+        /// <summary>
+        /// 错误信息
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 81)]
+        public string ErrorMsg;
     }
 }
