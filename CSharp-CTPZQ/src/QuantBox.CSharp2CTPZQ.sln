@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantBox.CSharp2CTPZQ", "QuantBox.CSharp2CTPZQ\QuantBox.CSharp2CTPZQ.csproj", "{0266F737-2271-4791-8FB0-5EA9A8AC0F7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantBox.CSharp2CTPZQ_CTP", "QuantBox.CSharp2CTPZQ\QuantBox.CSharp2CTPZQ_CTP.csproj", "{7CF14688-21E5-4352-99EA-BA1A6C1CE2A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{0266F737-2271-4791-8FB0-5EA9A8AC0F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0266F737-2271-4791-8FB0-5EA9A8AC0F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0266F737-2271-4791-8FB0-5EA9A8AC0F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF14688-21E5-4352-99EA-BA1A6C1CE2A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF14688-21E5-4352-99EA-BA1A6C1CE2A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF14688-21E5-4352-99EA-BA1A6C1CE2A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF14688-21E5-4352-99EA-BA1A6C1CE2A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

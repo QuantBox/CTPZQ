@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0266F737-2271-4791-8FB0-5EA9A8AC0F7A}</ProjectGuid>
+    <ProjectGuid>{7CF14688-21E5-4352-99EA-BA1A6C1CE2A4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>QuantBox.CSharp2CTPZQ</RootNamespace>
@@ -35,19 +35,19 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CTPZQ\Callbacks.cs" />
-    <Compile Include="CTPZQ\Error.cs" />
-    <Compile Include="CTPZQ\CommApi.cs" />
-    <Compile Include="CTPZQ\Delegates.cs" />
-    <Compile Include="CTPZQ\Enum.cs" />
-    <Compile Include="CTPZQ\EventArgs.cs" />
-    <Compile Include="CTPZQ\MdApi.cs" />
-    <Compile Include="CTPZQ\MdApiWrapper.cs" />
-    <Compile Include="CTPZQ\otherTypes.cs" />
-    <Compile Include="CTPZQ\Struct.cs" />
-    <Compile Include="CTPZQ\TraderApi.cs" />
+    <Compile Include="CTP\Callbacks.cs" />
+    <Compile Include="CTP\CommApi.cs" />
+    <Compile Include="CTP\Delegates.cs" />
+    <Compile Include="CTP\Enum.cs" />
+    <Compile Include="CTP\Error.cs" />
+    <Compile Include="CTP\EventArgs.cs" />
+    <Compile Include="CTP\MdApi.cs" />
+    <Compile Include="CTP\MdApiWrapper.cs" />
+    <Compile Include="CTP\otherTypes.cs" />
+    <Compile Include="CTP\Struct.cs" />
+    <Compile Include="CTP\TraderApi.cs" />
+    <Compile Include="CTP\TraderApiWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CTPZQ\TraderApiWrapper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
