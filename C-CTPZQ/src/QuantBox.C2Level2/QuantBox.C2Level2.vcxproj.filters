@@ -63,6 +63,9 @@
     <ClInclude Include="include\toolkit.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -88,5 +91,10 @@
     <Library Include="include\Level2\level2userapi.lib">
       <Filter>lib</Filter>
     </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="QuantBox.C2Level2.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -89,6 +89,7 @@
     <ClInclude Include="Level2MsgQueue.h" />
     <ClInclude Include="Level2UserApi.h" />
     <ClInclude Include="QuantBox.C2Level2.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -112,6 +113,9 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="include\Level2\level2userapi.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="QuantBox.C2Level2.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

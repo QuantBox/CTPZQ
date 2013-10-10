@@ -59,6 +59,9 @@ private:
 	bool IsErrorRspInfo(CThostFtdcRspInfoField *pRspInfo);//不送出错消息
 
 private:
+	CRITICAL_SECTION			m_csMapSecurityIDs;
+	CRITICAL_SECTION			m_csMapIndexIDs;
+
 	ConnectionStatus			m_status;				//连接状态
 	int							m_nRequestID;			//请求ID，每次请求前自增
 

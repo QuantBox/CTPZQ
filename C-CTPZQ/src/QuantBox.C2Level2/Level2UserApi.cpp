@@ -2,6 +2,7 @@
 #include "Level2UserApi.h"
 #include "Level2MsgQueue.h"
 #include "include\toolkit.h"
+#include "include\Lock.h"
 
 #include <iostream>
 using namespace std;
@@ -11,11 +12,17 @@ CLevel2UserApi::CLevel2UserApi(void)
 	m_msgQueue = NULL;
 	m_status = E_uninit;
 	m_nRequestID = 0;
+
+	InitializeCriticalSection(&m_csMapSecurityIDs);
+	InitializeCriticalSection(&m_csMapIndexIDs);
 }
 
 CLevel2UserApi::~CLevel2UserApi(void)
 {
 	Disconnect();
+
+	DeleteCriticalSection(&m_csMapSecurityIDs);
+	DeleteCriticalSection(&m_csMapIndexIDs);
 }
 
 void CLevel2UserApi::RegisterMsgQueue(CLevel2MsgQueue* pMsgQueue)
@@ -203,6 +210,8 @@ void CLevel2UserApi::SubscribeLevel2MarketData(const string& szInstrumentIDs,con
 	char* pExchageID = new char[len];
 	strncpy(pExchageID,szExchageID.c_str(),len);
 
+	CLock cl(&m_csMapSecurityIDs);
+
 	set<string> _setInstrumentIDs;
 	map<string,set<string> >::iterator it = m_mapSecurityIDs.find(szExchageID);
 	if (it!=m_mapSecurityIDs.end())
@@ -260,6 +269,8 @@ void CLevel2UserApi::UnSubscribeLevel2MarketData(const string& szInstrumentIDs,c
 	len = szExchageID.length()+1;
 	char* pExchageID = new char[len];
 	strncpy(pExchageID,szExchageID.c_str(),len);
+
+	CLock cl(&m_csMapSecurityIDs);
 
 	set<string> _setInstrumentIDs;
 	map<string,set<string> >::iterator it = m_mapSecurityIDs.find(szExchageID);
@@ -328,6 +339,8 @@ void CLevel2UserApi::OnRspSubLevel2MarketData(CThostFtdcSpecificSecurityField *p
 	if(!IsErrorRspInfo(pRspInfo,nRequestID,bIsLast)
 		&&pSpecificSecurity)
 	{
+		CLock cl(&m_csMapSecurityIDs);
+
 		set<string> _setInstrumentIDs;
 		map<string,set<string> >::iterator it = m_mapSecurityIDs.find(pSpecificSecurity->ExchangeID);
 		if (it!=m_mapSecurityIDs.end())
@@ -346,6 +359,8 @@ void CLevel2UserApi::OnRspUnSubLevel2MarketData(CThostFtdcSpecificSecurityField 
 	if(!IsErrorRspInfo(pRspInfo,nRequestID,bIsLast)
 		&&pSpecificSecurity)
 	{
+		CLock cl(&m_csMapSecurityIDs);
+
 		set<string> _setInstrumentIDs;
 		map<string,set<string> >::iterator it = m_mapSecurityIDs.find(pSpecificSecurity->ExchangeID);
 		if (it!=m_mapSecurityIDs.end())
@@ -377,6 +392,8 @@ void CLevel2UserApi::SubscribeNGTSIndex(const string& szInstrumentIDs,const stri
 	len = szExchageID.length()+1;
 	char* pExchageID = new char[len];
 	strncpy(pExchageID,szExchageID.c_str(),len);
+
+	CLock cl(&m_csMapIndexIDs);
 
 	set<string> _setInstrumentIDs;
 	map<string,set<string> >::iterator it = m_mapIndexIDs.find(szExchageID);
@@ -435,6 +452,8 @@ void CLevel2UserApi::UnSubscribeNGTSIndex(const string& szInstrumentIDs,const st
 	len = szExchageID.length()+1;
 	char* pExchageID = new char[len];
 	strncpy(pExchageID,szExchageID.c_str(),len);
+
+	CLock cl(&m_csMapIndexIDs);
 
 	set<string> _setInstrumentIDs;
 	map<string,set<string> >::iterator it = m_mapIndexIDs.find(szExchageID);
@@ -503,6 +522,8 @@ void CLevel2UserApi::OnRspSubNGTSIndex(CThostFtdcSpecificSecurityField *pSpecifi
 	if(!IsErrorRspInfo(pRspInfo,nRequestID,bIsLast)
 		&&pSpecificSecurity)
 	{
+		CLock cl(&m_csMapIndexIDs);
+
 		set<string> _setInstrumentIDs;
 		map<string,set<string> >::iterator it = m_mapIndexIDs.find(pSpecificSecurity->ExchangeID);
 		if (it!=m_mapIndexIDs.end())
@@ -521,6 +542,8 @@ void CLevel2UserApi::OnRspUnSubNGTSIndex(CThostFtdcSpecificSecurityField *pSpeci
 	if(!IsErrorRspInfo(pRspInfo,nRequestID,bIsLast)
 		&&pSpecificSecurity)
 	{
+		CLock cl(&m_csMapIndexIDs);
+
 		set<string> _setInstrumentIDs;
 		map<string,set<string> >::iterator it = m_mapIndexIDs.find(pSpecificSecurity->ExchangeID);
 		if (it!=m_mapIndexIDs.end())
