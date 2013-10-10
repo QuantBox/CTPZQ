@@ -241,7 +241,7 @@ void CLevel2UserApi::SubscribeLevel2MarketData(const string& szInstrumentIDs,con
 		for (size_t j = 0; j<vct.size(); ++j)
 		{
 			strncpy(pArray[j].SecurityID,vct[j],sizeof(TThostFtdcSecurityIDType));
-			strncpy(pArray[j].ExchangeID,pExchageID,sizeof(TThostFtdcSecurityIDType));
+			strncpy(pArray[j].ExchangeID,pExchageID,sizeof(TThostFtdcExchangeIDType));
 		}
 
 		//¶©ÔÄ
@@ -301,7 +301,7 @@ void CLevel2UserApi::UnSubscribeLevel2MarketData(const string& szInstrumentIDs,c
 		for (size_t j = 0; j<vct.size(); ++j)
 		{
 			strncpy(pArray[j].SecurityID,vct[j],sizeof(TThostFtdcSecurityIDType));
-			strncpy(pArray[j].ExchangeID,pExchageID,sizeof(TThostFtdcSecurityIDType));
+			strncpy(pArray[j].ExchangeID,pExchageID,sizeof(TThostFtdcExchangeIDType));
 		}
 
 		//¶©ÔÄ
@@ -424,7 +424,7 @@ void CLevel2UserApi::SubscribeNGTSIndex(const string& szInstrumentIDs,const stri
 		for (size_t j = 0; j<vct.size(); ++j)
 		{
 			strncpy(pArray[j].SecurityID,vct[j],sizeof(TThostFtdcSecurityIDType));
-			strncpy(pArray[j].ExchangeID,pExchageID,sizeof(TThostFtdcSecurityIDType));
+			strncpy(pArray[j].ExchangeID,pExchageID,sizeof(TThostFtdcExchangeIDType));
 		}
 
 		//¶©ÔÄ
@@ -484,7 +484,7 @@ void CLevel2UserApi::UnSubscribeNGTSIndex(const string& szInstrumentIDs,const st
 		for (size_t j = 0; j<vct.size(); ++j)
 		{
 			strncpy(pArray[j].SecurityID,vct[j],sizeof(TThostFtdcSecurityIDType));
-			strncpy(pArray[j].ExchangeID,pExchageID,sizeof(TThostFtdcSecurityIDType));
+			strncpy(pArray[j].ExchangeID,pExchageID,sizeof(TThostFtdcExchangeIDType));
 		}
 
 		//¶©ÔÄ
