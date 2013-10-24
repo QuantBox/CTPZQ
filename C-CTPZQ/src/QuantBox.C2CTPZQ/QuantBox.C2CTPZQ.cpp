@@ -133,6 +133,14 @@ QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryInvestorPosition(void* pMsgQue
 	}
 }
 
+QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryInvestorPositionDetail(void* pMsgQueue,fnOnRspQryInvestorPositionDetail pCallback)
+{
+	if(pMsgQueue)
+	{
+		CTP_GetQueue(pMsgQueue)->RegisterCallback(pCallback);
+	}
+}
+
 QUANTBOXC2CTPZQ_API void __stdcall CTP_RegOnRspQryOrder(void* pMsgQueue,fnOnRspQryOrder pCallback)
 {
 	if(pMsgQueue)
