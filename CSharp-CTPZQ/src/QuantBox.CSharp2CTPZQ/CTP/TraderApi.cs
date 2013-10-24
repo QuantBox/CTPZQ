@@ -89,6 +89,9 @@ namespace QuantBox.CSharp2CTPZQ
         [DllImport(CommApi.DllFileName, EntryPoint = "TD_ReqQryInvestorPosition")]
         public static extern void TD_ReqQryInvestorPosition(IntPtr pTraderApi, string szInstrument);
 
+        [DllImport(CommApi.DllFileName, EntryPoint = "TD_ReqQryInvestorPositionDetail")]
+        public static extern void TD_ReqQryInvestorPositionDetail(IntPtr pTraderApi, string szInstrument);
+
         [DllImport(CommApi.DllFileName, EntryPoint = "TD_ReqQryTradingAccount")]
         public static extern void TD_ReqQryTradingAccount(IntPtr pTraderApi);
 
