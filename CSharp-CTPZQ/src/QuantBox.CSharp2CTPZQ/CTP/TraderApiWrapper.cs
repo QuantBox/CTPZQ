@@ -161,6 +161,7 @@ namespace QuantBox.CSharp2CTPZQ
                     TraderApi.CTP_RegOnRspQryInstrumentCommissionRate(m_pMsgQueue, _fnOnRspQryInstrumentCommissionRate_Holder);
                     //TraderApi.CTP_RegOnRspQryInstrumentMarginRate(m_pMsgQueue, _fnOnRspQryInstrumentMarginRate_Holder);
                     TraderApi.CTP_RegOnRspQryInvestorPosition(m_pMsgQueue, _fnOnRspQryInvestorPosition_Holder);
+                    TraderApi.CTP_RegOnRspQryInvestorPositionDetail(m_pMsgQueue, _fnOnRspQryInvestorPositionDetail_Holder);
                     TraderApi.CTP_RegOnRspQryOrder(m_pMsgQueue, _fnOnRspQryOrder_Holder);
                     TraderApi.CTP_RegOnRspQryTrade(m_pMsgQueue, _fnOnRspQryTrade_Holder);
                     TraderApi.CTP_RegOnRspQryTradingAccount(m_pMsgQueue, _fnOnRspQryTradingAccount_Holder);
@@ -264,6 +265,33 @@ namespace QuantBox.CSharp2CTPZQ
             }
 
             TraderApi.TD_CancelOrder(m_pTdApi, ref pOrder);
+        }
+
+        public void ReqQryTradingAccount()
+        {
+            if (null == m_pTdApi || IntPtr.Zero == m_pTdApi)
+            {
+                return;
+            }
+            TraderApi.TD_ReqQryTradingAccount(m_pTdApi);
+        }
+
+        public void ReqQryInvestorPositionDetail(string szInstrument)
+        {
+            if (null == m_pTdApi || IntPtr.Zero == m_pTdApi)
+            {
+                return;
+            }
+            TraderApi.TD_ReqQryInvestorPositionDetail(m_pTdApi, szInstrument);
+        }
+
+        public void ReqQryInstrumentCommissionRate(string szInstrument)
+        {
+            if (null == m_pTdApi || IntPtr.Zero == m_pTdApi)
+            {
+                return;
+            }
+            TraderApi.TD_ReqQryInstrumentCommissionRate(m_pTdApi, szInstrument);
         }
 
         private void OnConnect_callback(IntPtr pApi, ref CThostFtdcRspUserLoginField pRspUserLogin, ConnectionStatus result)
