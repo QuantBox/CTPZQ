@@ -79,7 +79,8 @@ public:
 		TZQThostFtdcOrderPriceTypeType OrderPriceType,
 		TZQThostFtdcTimeConditionType TimeCondition,
 		TZQThostFtdcContingentConditionType ContingentCondition,
-		TZQThostFtdcPriceType StopPrice);
+		TZQThostFtdcPriceType StopPrice,
+		TZQThostFtdcVolumeConditionType VolumeCondition);
 	void ReqOrderAction(CZQThostFtdcOrderField *pOrder);
 
 	void ReqQryTradingAccount();

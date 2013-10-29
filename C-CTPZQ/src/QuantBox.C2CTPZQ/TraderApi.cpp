@@ -481,7 +481,8 @@ int CTraderApi::ReqOrderInsert(
 	TZQThostFtdcOrderPriceTypeType OrderPriceType,
 	TZQThostFtdcTimeConditionType TimeCondition,
 	TZQThostFtdcContingentConditionType ContingentCondition,
-	TZQThostFtdcPriceType StopPrice)
+	TZQThostFtdcPriceType StopPrice,
+	TZQThostFtdcVolumeConditionType VolumeCondition)
 {
 	if (NULL == m_pApi)
 		return 0;
@@ -520,7 +521,7 @@ int CTraderApi::ReqOrderInsert(
 	memcpy(body.CombHedgeFlag,CombHedgeFlag,sizeof(TZQThostFtdcCombHedgeFlagType));
 	
 	//¸÷Ìõ¼þ
-	body.VolumeCondition = THOST_FTDC_VC_AV;
+	body.VolumeCondition = VolumeCondition;
 	body.TimeCondition = TimeCondition;
 	body.ContingentCondition = ContingentCondition;
 	body.StopPrice = StopPrice;
