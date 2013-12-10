@@ -4817,6 +4817,8 @@ namespace QuantBox.CSharp2CTPZQ
         ByDayIns = (byte)'2'
     }
 
+
+
     /// <summary>
     /// TFtdcOTPTypeType是一个动态令牌类型类型
     /// </summary>
@@ -5321,5 +5323,26 @@ namespace QuantBox.CSharp2CTPZQ
         /// 流通股本
         /// </summary>
         CIRCULATION = (byte)'2'
+    }
+
+    /// <summary>
+    /// TFtdcInstrumentStatusFlagType是一个产品状态标志类型
+    /// </summary>
+    public enum TThostFtdcInstrumentStatusFlagType : byte
+    {
+        /// <summary>
+        /// 国内主板正常交易产品
+        /// </summary>
+        Normal = (byte)'1',
+
+        /// <summary>
+        /// 风险警示产品
+        /// </summary>
+        RiskAlert = (byte)'2',
+
+        /// <summary>
+        /// 退市整理产品
+        /// </summary>
+        Delisting = (byte)'3'
     }
 }

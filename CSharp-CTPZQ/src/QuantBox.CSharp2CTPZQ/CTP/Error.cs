@@ -683,6 +683,16 @@ namespace QuantBox.CSharp2CTPZQ
         /// 综合交易平台：无法找到债券质押对照关系
         /// </summary
         BONDPLEDGE_NOT_FOUND = 3020,
+
+        /// <summary>
+        /// 综合交易平台：用户会话超过限额
+        /// </summary
+        SINGLEUSERSESSION_EXCEED_LIMIT = 3021,
+
+        /// <summary>
+        /// 综合交易平台：风险警示板股票单一账户当日累计买入超过限额数量
+        /// </summary
+        RISK_BLOCK_VOLUME_EXCCEED_LIMIT = 3022,
         // <!-- add for Stock end -->
     }
 }

@@ -73,4 +73,30 @@ namespace QuantBox.CSharp2CTPZQ
         /// </summary>
         BrokerLaunchBrokerToBank = (byte)'3'//'202002'
     }
+
+    /// <summary>
+    /// TFtdcFBTTradeCodeEnumType是一个银期交易代码枚举类型
+    /// </summary>
+    public enum TThostFtdcFBTTradeCodeEnumType : byte
+    {
+        /// <summary>
+        /// 银行发起银行转期货
+        /// </summary>
+        BankLaunchBankToBroker = (byte)'0',//'102001',
+
+        /// <summary>
+        /// 期货发起银行转期货
+        /// </summary>
+        BrokerLaunchBankToBroker = (byte)'1',//'202001',
+
+        /// <summary>
+        /// 银行发起期货转银行
+        /// </summary>
+        BankLaunchBrokerToBank = (byte)'2',//'102002',
+
+        /// <summary>
+        /// 期货发起期货转银行
+        /// </summary>
+        BrokerLaunchBrokerToBank = (byte)'3',//'202002'
+    }
 }

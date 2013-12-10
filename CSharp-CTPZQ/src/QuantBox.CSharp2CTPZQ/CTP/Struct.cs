@@ -855,6 +855,10 @@ namespace QuantBox.CSharp2CTPZQ
         /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 31)]
         public string RightModelID;
+        /// <summary>
+        /// 产品状态标志
+        /// </summary>
+        public TThostFtdcInstrumentStatusFlagType InstrumentStatusFlag;
     }
 
     /// <summary>
@@ -2531,7 +2535,7 @@ namespace QuantBox.CSharp2CTPZQ
         /// <summary>
         /// 价格
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string LimitPrice;
         /// <summary>
         /// 数量
@@ -2642,7 +2646,7 @@ namespace QuantBox.CSharp2CTPZQ
         /// <summary>
         /// 价格
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string LimitPrice;
         /// <summary>
         /// 数量
@@ -2893,7 +2897,7 @@ namespace QuantBox.CSharp2CTPZQ
         /// <summary>
         /// 价格
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string LimitPrice;
         /// <summary>
         /// 数量
@@ -3488,7 +3492,7 @@ namespace QuantBox.CSharp2CTPZQ
         /// <summary>
         /// 价格
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string Price;
         /// <summary>
         /// 数量
@@ -3618,7 +3622,7 @@ namespace QuantBox.CSharp2CTPZQ
         /// <summary>
         /// 价格
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string Price;
         /// <summary>
         /// 数量
@@ -6726,7 +6730,7 @@ namespace QuantBox.CSharp2CTPZQ
         /// <summary>
         /// 价格
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string LimitPrice;
         /// <summary>
         /// 数量
@@ -7283,7 +7287,7 @@ namespace QuantBox.CSharp2CTPZQ
         /// <summary>
         /// 价格
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string LimitPrice;
         /// <summary>
         /// 数量
@@ -7403,7 +7407,7 @@ namespace QuantBox.CSharp2CTPZQ
         /// <summary>
         /// 价格
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 9)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string LimitPrice;
         /// <summary>
         /// 数量
@@ -8226,6 +8230,52 @@ namespace QuantBox.CSharp2CTPZQ
         /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 41)]
         public string SecondOTP;
+    }
+
+    /// <summary>
+    /// 经纪公司用户DES加密口令
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CThostFtdcInvestorDESPasswordField
+    {
+        /// <summary>
+        /// 经纪公司代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 11)]
+        public string BrokerID;
+        /// <summary>
+        /// 投资者代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
+        public string InvestorID;
+        /// <summary>
+        /// 密码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 81)]
+        public string Password;
+    }
+
+    /// <summary>
+    /// 资金账户口令DES加密
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CThostFtdcAccountDESPasswordField
+    {
+        /// <summary>
+        /// 经纪公司代码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 11)]
+        public string BrokerID;
+        /// <summary>
+        /// 投资者帐号
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
+        public string AccountID;
+        /// <summary>
+        /// 密码
+        /// </summary>
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 81)]
+        public string Password;
     }
 
     /// <summary>

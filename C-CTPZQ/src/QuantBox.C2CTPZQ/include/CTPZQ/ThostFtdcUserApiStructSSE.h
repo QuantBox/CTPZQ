@@ -417,6 +417,8 @@ struct CZQThostFtdcInstrumentField
 	TZQThostFtdcVolumeType	MinSellVolume;
 	///股票权限模版代码
 	TZQThostFtdcRightModelIDType	RightModelID;
+	///产品状态标志
+	TZQThostFtdcInstrumentStatusFlagType	InstrumentStatusFlag;
 };
 
 ///经纪公司
@@ -3914,6 +3916,28 @@ struct CZQThostFtdcManualSyncBrokerUserOTPField
 	TZQThostFtdcPasswordType	FirstOTP;
 	///第二个动态密码
 	TZQThostFtdcPasswordType	SecondOTP;
+};
+
+///经纪公司用户DES加密口令
+struct CZQThostFtdcInvestorDESPasswordField
+{
+	///经纪公司代码
+	TZQThostFtdcBrokerIDType	BrokerID;
+	///投资者代码
+	TZQThostFtdcInvestorIDType	InvestorID;
+	///密码
+	TZQThostFtdcDESPasswordType	Password;
+};
+
+///资金账户口令DES加密
+struct CZQThostFtdcAccountDESPasswordField
+{
+	///经纪公司代码
+	TZQThostFtdcBrokerIDType	BrokerID;
+	///投资者帐号
+	TZQThostFtdcAccountIDType	AccountID;
+	///密码
+	TZQThostFtdcDESPasswordType	Password;
 };
 
 ///转帐开户请求
