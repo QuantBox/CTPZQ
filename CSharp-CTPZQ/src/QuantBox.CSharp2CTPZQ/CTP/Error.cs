@@ -693,6 +693,16 @@ namespace QuantBox.CSharp2CTPZQ
         /// 综合交易平台：风险警示板股票单一账户当日累计买入超过限额数量
         /// </summary
         RISK_BLOCK_VOLUME_EXCCEED_LIMIT = 3022,
+
+        /// <summary>
+        /// 综合交易平台：买入超过申购限额
+        /// </summary
+        OVERSUBSCRIBINGQUOTA = 3023,
+
+        /// <summary>
+        /// 综合交易平台：不合法的报单价格
+        /// </summary
+        INVALID_ORDER_PRICE = 3024,
         // <!-- add for Stock end -->
     }
 }

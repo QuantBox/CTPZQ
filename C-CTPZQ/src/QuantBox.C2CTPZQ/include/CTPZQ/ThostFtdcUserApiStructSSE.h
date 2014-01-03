@@ -5770,6 +5770,23 @@ struct CZQThostFtdcFundIOCTPAccountField
 	TZQThostFtdcErrorMsgType	ErrorMsg;
 };
 
+///投资者新股申购额度
+struct CZQThostFtdcInvestorSubscribingSharesQuotaField
+{
+	///经纪公司代码
+	TZQThostFtdcBrokerIDType	BrokerID;
+	///投资者代码
+	TZQThostFtdcInvestorIDType	InvestorID;
+	///用户代码
+	TZQThostFtdcUserIDType	UserID;
+	///交易所代码
+	TZQThostFtdcExchangeIDType	ExchangeID;
+	///合约代码
+	TZQThostFtdcInstrumentIDType	InstrumentID;
+	///最大允许申购数量
+	TZQThostFtdcVolumeType	MaxVolume;
+};
+
 
 _SHFE_NS_STOCK_END_
 #endif

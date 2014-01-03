@@ -143,5 +143,7 @@
 	<error id="BONDPLEDGE_NOT_FOUND" value="3020" prompt="综合交易平台：无法找到债券质押对照关系"/>
 	<error id="SINGLEUSERSESSION_EXCEED_LIMIT" value="3021" prompt="综合交易平台：用户会话超过限额"/>
 	<error id="RISK_BLOCK_VOLUME_EXCCEED_LIMIT" value="3022" prompt="综合交易平台：风险警示板股票单一账户当日累计买入超过限额数量"/>
+	<error id="OVERSUBSCRIBINGQUOTA" value="3023" prompt="综合交易平台：买入超过申购限额"/>
+	<error id="INVALID_ORDER_PRICE" value="3024" prompt="综合交易平台：不合法的报单价格"/>
 	<!-- add for Stock end -->
 </errors>

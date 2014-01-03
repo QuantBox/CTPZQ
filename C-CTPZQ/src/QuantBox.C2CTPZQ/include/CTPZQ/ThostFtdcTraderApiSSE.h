@@ -106,6 +106,9 @@ public:
 	///请求查询债券利息响应
 	virtual void OnRspQryBondInterest(CZQThostFtdcBondInterestField *pBondInterest, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
 
+	///请求查询新股申购报单响应
+	virtual void OnRspQrySubscribingSharesOrder(CZQThostFtdcOrderField *pOrder, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
+
 	///错误应答
 	virtual void OnRspError(CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {};
 
@@ -123,6 +126,9 @@ public:
 
 	///合约交易状态通知
 	virtual void OnRtnInstrumentStatus(CZQThostFtdcInstrumentStatusField *pInstrumentStatus) {};
+
+	///投资者新股申购额度通知
+	virtual void OnRtnInvestorSubscribingSharesQuota(CZQThostFtdcInvestorSubscribingSharesQuotaField *pInvestorSubscribingSharesQuota) {};
 
 	///资金转入CTP通知
 	virtual void OnRtnFundIntoCTPAccount(CZQThostFtdcFundIOCTPAccountField *pFundIOCTPAccount) {};
@@ -246,6 +252,9 @@ public:
 
 	///请求查询债券利息
 	virtual int ReqQryBondInterest(CZQThostFtdcQryBondInterestField *pQryBondInterest, int nRequestID) = 0;
+
+	///请求查询新股申购报单
+	virtual int ReqQrySubscribingSharesOrder(CZQThostFtdcQryOrderField *pQryOrder, int nRequestID) = 0;
 
 	///资金转出CTP请求请求
 	virtual int ReqFundOutCTPAccount(CZQThostFtdcReqFundIOCTPAccountField *pReqFundIOCTPAccount, int nRequestID) = 0;
