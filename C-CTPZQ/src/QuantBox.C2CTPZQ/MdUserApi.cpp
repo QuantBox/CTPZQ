@@ -2,25 +2,22 @@
 #include "MdUserApi.h"
 #include "CTPZQMsgQueue.h"
 #include "include\toolkit.h"
-#include "include\Lock.h"
 
 #include <iostream>
+#include <mutex>
 using namespace std;
 
 CMdUserApi::CMdUserApi(void)
 {
+	m_pApi = NULL;
 	m_msgQueue = NULL;
 	m_status = E_uninit;
 	m_nRequestID = 0;
-
-	InitializeCriticalSection(&m_csMapInstrumentIDs);
 }
 
 CMdUserApi::~CMdUserApi(void)
 {
 	Disconnect();
-
-	DeleteCriticalSection(&m_csMapInstrumentIDs);
 }
 
 void CMdUserApi::RegisterMsgQueue(CCTPZQMsgQueue* pMsgQueue)
@@ -147,7 +144,7 @@ void CMdUserApi::Subscribe(const string& szInstrumentIDs,const string& szExchage
 	char* pExchageID = new char[len];
 	strncpy(pExchageID,szExchageID.c_str(),len);
 
-	CLock cl(&m_csMapInstrumentIDs);
+	lock_guard<mutex> cl(m_csMapInstrumentIDs);
 
 	set<string> _setInstrumentIDs;
 	map<string,set<string> >::iterator it = m_mapInstrumentIDs.find(szExchageID);
@@ -223,7 +220,7 @@ void CMdUserApi::Unsubscribe(const string& szInstrumentIDs,const string& szExcha
 	char* pExchageID = new char[len];
 	strncpy(pExchageID,szExchageID.c_str(),len);
 
-	CLock cl(&m_csMapInstrumentIDs);
+	lock_guard<mutex> cl(m_csMapInstrumentIDs);
 
 	set<string> _setInstrumentIDs;
 	map<string,set<string> >::iterator it = m_mapInstrumentIDs.find(szExchageID);
@@ -329,7 +326,7 @@ void CMdUserApi::OnRspSubMarketData(CZQThostFtdcSpecificInstrumentField *pSpecif
 	if(!IsErrorRspInfo(pRspInfo,nRequestID,bIsLast)
 		&&pSpecificInstrument)
 	{
-		CLock cl(&m_csMapInstrumentIDs);
+		lock_guard<mutex> cl(m_csMapInstrumentIDs);
 
 		set<string> _setInstrumentIDs;
 		map<string,set<string> >::iterator it = m_mapInstrumentIDs.find(pSpecificInstrument->ExchangeID);
@@ -349,7 +346,7 @@ void CMdUserApi::OnRspUnSubMarketData(CZQThostFtdcSpecificInstrumentField *pSpec
 	if(!IsErrorRspInfo(pRspInfo,nRequestID,bIsLast)
 		&&pSpecificInstrument)
 	{
-		CLock cl(&m_csMapInstrumentIDs);
+		lock_guard<mutex> cl(m_csMapInstrumentIDs);
 
 		set<string> _setInstrumentIDs;
 		map<string,set<string> >::iterator it = m_mapInstrumentIDs.find(pSpecificInstrument->ExchangeID);

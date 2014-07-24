@@ -67,14 +67,16 @@ namespace QuantBox.CSharp2CTPZQ
             string szUserProductInfo, string szAuthCode);
 
         [DllImport(CommApi.DllFileName, EntryPoint = "TD_SendOrder")]
-        public static extern int TD_SendOrder(IntPtr pTraderApi,
+        public static extern int TD_SendOrder(
+            IntPtr pTraderApi,
+            int OrderRef,
             string szInstrument,
             string szExchange,
             TThostFtdcDirectionType Direction,
             string szCombOffsetFlag,
             string szCombHedgeFlag,
             int VolumeTotalOriginal,
-            string LimitPrice,
+            double LimitPrice,
             TThostFtdcOrderPriceTypeType OrderPriceType,
             TThostFtdcTimeConditionType TimeCondition,
             TThostFtdcContingentConditionType ContingentCondition,

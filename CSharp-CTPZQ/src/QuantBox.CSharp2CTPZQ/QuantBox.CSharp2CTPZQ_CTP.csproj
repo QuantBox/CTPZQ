@@ -32,23 +32,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="QuantBox.Library">
+      <HintPath>..\..\lib\QuantBox.Library.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Callback\BaseApi.cs" />
+    <Compile Include="Callback\Callback.cs" />
+    <Compile Include="Callback\MarketDataApi.cs" />
+    <Compile Include="Callback\MsgQueue.cs" />
+    <Compile Include="Callback\TradeApi.cs" />
     <Compile Include="CTP\Callbacks.cs" />
     <Compile Include="CTP\CommApi.cs" />
-    <Compile Include="CTP\Delegates.cs" />
+    <Compile Include="Event\Delegates.cs" />
     <Compile Include="CTP\Enum.cs" />
     <Compile Include="CTP\Error.cs" />
-    <Compile Include="CTP\EventArgs.cs" />
+    <Compile Include="Event\EventArgs.cs" />
     <Compile Include="CTP\MdApi.cs" />
-    <Compile Include="CTP\MdApiWrapper.cs" />
+    <Compile Include="Event\MdApiWrapper.cs" />
     <Compile Include="CTP\otherTypes.cs" />
     <Compile Include="CTP\Struct.cs" />
     <Compile Include="CTP\TraderApi.cs" />
-    <Compile Include="CTP\TraderApiWrapper.cs" />
+    <Compile Include="Event\TraderApiWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

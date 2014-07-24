@@ -142,13 +142,14 @@ QUANTBOXC2CTPZQ_API void __stdcall TD_Connect(
 //±¨µ¥
 QUANTBOXC2CTPZQ_API int __stdcall TD_SendOrder(
 	void* pTraderApi,
+	int OrderRef,
 	const char* szInstrument,
 	const char* szExchage,
 	TZQThostFtdcDirectionType Direction,
 	const char* szCombOffsetFlag,
 	const char* szCombHedgeFlag,
 	TZQThostFtdcVolumeType VolumeTotalOriginal,
-	TZQThostFtdcStockPriceType LimitPrice,
+	double LimitPrice,
 	TZQThostFtdcOrderPriceTypeType OrderPriceType,
 	TZQThostFtdcTimeConditionType TimeCondition,
 	TZQThostFtdcContingentConditionType ContingentCondition,

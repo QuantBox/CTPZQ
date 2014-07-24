@@ -7,6 +7,8 @@
 #include <list>
 #include <map>
 #include <string>
+#include <mutex>
+#include <atomic>
 
 using namespace std;
 
@@ -69,6 +71,7 @@ public:
 	void Disconnect();
 
 	int ReqOrderInsert(
+		int OrderRef,
 		const string& szInstrumentId,
 		const string& szExchangeId,
 		TZQThostFtdcDirectionType Direction,
@@ -81,7 +84,7 @@ public:
 		TZQThostFtdcContingentConditionType ContingentCondition,
 		TZQThostFtdcPriceType StopPrice,
 		TZQThostFtdcVolumeConditionType VolumeCondition);
-	void ReqOrderAction(CZQThostFtdcOrderField *pOrder);
+	int ReqOrderAction(CZQThostFtdcOrderField *pOrder);
 
 	void ReqQryTradingAccount();
 	void ReqQryInvestorPosition(const string& szInstrumentId);
@@ -165,11 +168,11 @@ private:
 
 private:
 	ConnectionStatus			m_status;				//连接状态
-	volatile LONG				m_lRequestID;			//请求ID,得保持自增
+	atomic<int>					m_lRequestID;			//请求ID,得保持自增
 	
 	CZQThostFtdcRspUserLoginField m_RspUserLogin;			//返回的登录成功响应，目前利用此内成员进行报单所属区分
 
-	CRITICAL_SECTION			m_csOrderRef;
+	mutex						m_csOrderRef;
 	int							m_nMaxOrderRef;			//报单引用，用于区分报单，保持自增
 
 	CZQThostFtdcTraderApi*		m_pApi;					//交易API
@@ -187,10 +190,10 @@ private:
 	bool						m_bRunning;
 	HANDLE						m_hThread;
 
-	CRITICAL_SECTION			m_csList;
+	mutex						m_csList;
 	list<SRequest*>				m_reqList;				//将发送请求队列
 
-	CRITICAL_SECTION			m_csMap;
+	mutex						m_csMap;
 	map<int,SRequest*>			m_reqMap;				//已发送请求池
 };
 

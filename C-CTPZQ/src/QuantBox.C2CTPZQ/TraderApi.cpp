@@ -2,30 +2,22 @@
 #include "TraderApi.h"
 #include "CTPZQMsgQueue.h"
 #include "include\toolkit.h"
-#include "include\Lock.h"
 
 CTraderApi::CTraderApi(void)
 {
+	m_pApi = NULL;
 	m_msgQueue = NULL;
 	m_status = E_uninit;
 	m_lRequestID = 0;
 
 	m_hThread = NULL;
 	m_bRunning = false;
-
-	InitializeCriticalSection(&m_csList);
-	InitializeCriticalSection(&m_csMap);
-	InitializeCriticalSection(&m_csOrderRef);
 }
 
 
 CTraderApi::~CTraderApi(void)
 {
 	Disconnect();
-
-	DeleteCriticalSection(&m_csList);
-	DeleteCriticalSection(&m_csMap);
-	DeleteCriticalSection(&m_csOrderRef);
 }
 
 void CTraderApi::StopThread()
@@ -153,7 +145,7 @@ CTraderApi::SRequest* CTraderApi::MakeRequestBuf(RequestType type)
 
 void CTraderApi::ReleaseRequestListBuf()
 {
-	CLock cl(&m_csList);
+	lock_guard<mutex> cl(m_csList);
 	while (!m_reqList.empty())
 	{
 		SRequest * pRequest = m_reqList.front();
@@ -164,7 +156,7 @@ void CTraderApi::ReleaseRequestListBuf()
 
 void CTraderApi::ReleaseRequestMapBuf()
 {
-	CLock cl(&m_csMap);
+	lock_guard<mutex> cl(m_csMap);
 	for (map<int,SRequest*>::iterator it=m_reqMap.begin();it!=m_reqMap.end();++it)
 	{
 		delete (*it).second;
@@ -174,7 +166,7 @@ void CTraderApi::ReleaseRequestMapBuf()
 
 void CTraderApi::ReleaseRequestMapBuf(int nRequestID)
 {
-	CLock cl(&m_csMap);
+	lock_guard<mutex> cl(m_csMap);
 	map<int,SRequest*>::iterator it = m_reqMap.find(nRequestID);
 	if (it!=m_reqMap.end())
 	{
@@ -188,7 +180,7 @@ void CTraderApi::AddRequestMapBuf(int nRequestID,SRequest* pRequest)
 	if(NULL == pRequest)
 		return;
 
-	CLock cl(&m_csMap);
+	lock_guard<mutex> cl(m_csMap);
 	map<int,SRequest*>::iterator it = m_reqMap.find(nRequestID);
 	if (it!=m_reqMap.end())
 	{
@@ -214,7 +206,7 @@ void CTraderApi::AddToSendQueue(SRequest * pRequest)
 	if (NULL == pRequest)
 		return;
 
-	CLock cl(&m_csList);
+	lock_guard<mutex> cl(m_csList);
 	bool bFind = false;
 	//目前不去除相同类型的请求，即没有对大量同类型请求进行优化
 	//for (list<SRequest*>::iterator it = m_reqList.begin();it!= m_reqList.end();++it)
@@ -245,7 +237,7 @@ void CTraderApi::RunInThread()
 	while (!m_reqList.empty()&&m_bRunning)
 	{
 		SRequest * pRequest = m_reqList.front();
-		long lRequest = InterlockedIncrement(&m_lRequestID);
+		int lRequest = ++m_lRequestID;// 这个地方是否会出现原子操作的问题呢？
 		switch(pRequest->type)
 		{
 		case E_ReqAuthenticateField:
@@ -286,14 +278,14 @@ void CTraderApi::RunInThread()
 			m_nSleep = 1;
 			AddRequestMapBuf(lRequest,pRequest);
 
-			CLock cl(&m_csList);
+			lock_guard<mutex> cl(m_csList);
 			m_reqList.pop_front();
 		}
 		else
 		{
 			//失败，按2的幂进行延时，但不超过1s
 			m_nSleep *= 2;
-			m_nSleep %= 1000;
+			m_nSleep %= 1023;
 		}
 		Sleep(m_nSleep);
 	}
@@ -471,6 +463,7 @@ void CTraderApi::OnRspSettlementInfoConfirm(CZQThostFtdcSettlementInfoConfirmFie
 */
 
 int CTraderApi::ReqOrderInsert(
+	int OrderRef,
 	const string& szInstrumentId,
 	const string& szExchangeId,
 	TZQThostFtdcDirectionType Direction,
@@ -529,15 +522,26 @@ int CTraderApi::ReqOrderInsert(
 	int nRet = 0;
 	{
 		//可能报单太快，m_nMaxOrderRef还没有改变就提交了
-		CLock cl(&m_csOrderRef);
+		lock_guard<mutex> cl(m_csOrderRef);
 
-		nRet = m_nMaxOrderRef;
-		sprintf(body.OrderRef,"%d",nRet);
-		++m_nMaxOrderRef;
+		if (OrderRef < 0)
+		{
+			nRet = m_nMaxOrderRef;
+			sprintf(body.OrderRef, "%d", nRet);
+			++m_nMaxOrderRef;
+		}
+		else
+		{
+			nRet = OrderRef;
+			sprintf(body.OrderRef, "%d", OrderRef);
+		}
 
 		//不保存到队列，而是直接发送
-		long lRequest = InterlockedIncrement(&m_lRequestID);
-		int n = m_pApi->ReqOrderInsert(&pRequest->InputOrderField,lRequest);
+		int n = m_pApi->ReqOrderInsert(&pRequest->InputOrderField, ++m_lRequestID);
+		if (n < 0)
+		{
+			nRet = n;
+		}
 	}
 	delete pRequest;//用完后直接删除
 
@@ -564,14 +568,14 @@ void CTraderApi::OnRtnTrade(CZQThostFtdcTradeField *pTrade)
 		m_msgQueue->Input_OnRtnTrade(this,pTrade);
 }
 
-void CTraderApi::ReqOrderAction(CZQThostFtdcOrderField *pOrder)
+int CTraderApi::ReqOrderAction(CZQThostFtdcOrderField *pOrder)
 {
 	if (NULL == m_pApi)
-		return;
+		return 0;
 	
 	SRequest* pRequest = MakeRequestBuf(E_InputOrderActionField);
 	if (NULL == pRequest)
-		return;
+		return 0;
 	
 	CZQThostFtdcInputOrderActionField& body = pRequest->InputOrderActionField;
 
@@ -594,9 +598,9 @@ void CTraderApi::ReqOrderAction(CZQThostFtdcOrderField *pOrder)
 	///合约代码
 	strncpy(body.InstrumentID, pOrder->InstrumentID,sizeof(TZQThostFtdcInstrumentIDType));
 	
-	long lRequest = InterlockedIncrement(&m_lRequestID);
-	m_pApi->ReqOrderAction(&pRequest->InputOrderActionField,lRequest);
+	int nRet = m_pApi->ReqOrderAction(&pRequest->InputOrderActionField, ++m_lRequestID);
 	delete pRequest;
+	return nRet;
 }
 
 void CTraderApi::OnRspOrderAction(CZQThostFtdcInputOrderActionField *pInputOrderAction, CZQThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)

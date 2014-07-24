@@ -4,8 +4,10 @@
 #include "include\CTPZQ\ThostFtdcMdApiSSE.h"
 
 #include <set>
-#include <map>
 #include <string>
+#include <atomic>
+#include <mutex>
+#include <map>
 
 using namespace std;
 
@@ -49,10 +51,10 @@ private:
 	bool IsErrorRspInfo(CZQThostFtdcRspInfoField *pRspInfo);//不送出错消息
 
 private:
-	CRITICAL_SECTION			m_csMapInstrumentIDs;
+	mutex						m_csMapInstrumentIDs;
 
 	ConnectionStatus			m_status;				//连接状态
-	int							m_nRequestID;			//请求ID，每次请求前自增
+	atomic<int>					m_nRequestID;			//请求ID，每次请求前自增
 
 	map<string,set<string> >	m_mapInstrumentIDs;		//正在订阅的合约
 	CZQThostFtdcMdApi*			m_pApi;					//行情API
