@@ -393,7 +393,7 @@ namespace QuantBox.CSharp2CTPZQ.Callback
         protected override void OnConnect_3(IntPtr pApi, ref CThostFtdcRspUserLoginField pRspUserLogin, ConnectionStatus result)
         {
             IsConnected = false;
-            if (result == ConnectionStatus.Confirmed)
+            if (result == ConnectionStatus.Logined)
             {
                 IsConnected = true;
             }
